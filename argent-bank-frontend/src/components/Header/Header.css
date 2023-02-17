@@ -1,0 +1,48 @@
+.headerNav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    padding: 10px 20px;
+}
+
+.signButton {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10px;
+    width: 120px;
+}
+
+.signButton button {
+    font-size: 16px;
+    font-weight: bold;
+    color: #2c3e50;
+    text-decoration: none;
+    border: none;
+    background-color: white;
+}
+
+.signButton button:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.signButton button.router-link-exact-active {
+    color: #42b983;
+}
+
+.userIcon {
+    height: 20px;
+    width: 20px;
+    margin-top: -3px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+  max-width: 100%;
+  width: 200px;
+}

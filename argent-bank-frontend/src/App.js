@@ -1,24 +1,30 @@
-import './App.css';
+import React from 'react'
+import { BrowserRouter, Route, Routes} from 'react-router-dom'
 
-function App() {
+import Homepage from './pages/Homepage/Homepage'
+// import SignIn from './pages/SignIn/SignIn'
+// import Profil from './pages/Profil/Profil'
+// import Error404 from './pages/Error404/Error404'
+
+import './App.css'
+
+/** 
+ * @file App.js is the root file for this app. <br>
+ * * @author Veronica BERNARD
+ * @see <a href="https://github.com/VSABernard">My GitHub</a>
+ */
+
+const App= () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Homepage/>} /> 
+          {/* <Route path="/SignIn" element={<SignIn/>} />
+          <Route path="/Profil" element={<Profil/>}/>           
+          <Route path="*" element={<Error404/>} /> */}
+        </Routes>
+    </BrowserRouter>    
+  )
 }
 
-export default App;
+export default App
