@@ -35,8 +35,7 @@ const Header = () => {
                             Sign Out
                         </NavLink>
                     }
-                </div>
-                
+                </div>                
             </ul>
         </header>
     )

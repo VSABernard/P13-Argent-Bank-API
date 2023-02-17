@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import { FaUserCircle } from "react-icons/fa"
 import { NavLink } from "react-router-dom"
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 import { signIn, setUser } from "../../actions/Action"
 
 import "../SignInForm/SignInForm.css"
