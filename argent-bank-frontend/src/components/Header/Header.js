@@ -14,6 +14,7 @@ import '../Header/Header.css'
 const Header = () => {
     return (
         <header className="header">
+            <h1 className="sr-only">Argent Bank</h1>
             <ul className="headerNav">
                 <Link className="logo" to="/" >
                     <img src={logo} alt="Argent Bank logo" />
