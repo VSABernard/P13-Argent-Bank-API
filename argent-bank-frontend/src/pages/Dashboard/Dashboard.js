@@ -16,7 +16,7 @@ const Dashboard = () => {
     return (
         <div>
             <DashboardHeader />
-            {/* <DashboardAccount /> */}
+            <DashboardAccount /> 
             <Footer />
         </div>
     )    

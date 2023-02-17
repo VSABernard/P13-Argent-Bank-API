@@ -6,7 +6,7 @@
     padding: 10px 20px;
 }
 
-.sr-only {
+.srOnly {
     border: 0 !important;
     clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
     -webkit-clip-path: inset(50%) !important;
@@ -48,7 +48,7 @@
 .userIcon {
     height: 20px;
     width: 20px;
-    margin-right: 5px;
+    color: black;
 }
 
 .logo {
