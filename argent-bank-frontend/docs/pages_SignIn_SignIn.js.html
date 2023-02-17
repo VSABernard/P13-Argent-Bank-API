@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Header/Header.js</title>
+    <title>JSDoc: Source: pages/SignIn/SignIn.js</title>
     <link rel="icon" href="../custom-template/assets/favicon.png" />  
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -27,39 +27,31 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react"
-import { Link, NavLink } from "react-router-dom"
-import { FaUserCircle } from "react-icons/fa"
 
-import logo from '../../assets/argentBankLogo.png'
+import Header from '../../components/Header/Header'
+import SignInForm from "../../components/SignInForm/SignInForm"
+import Footer from '../../components/Footer/Footer'
 
-import '../Header/Header.css'
+import '../SignIn/SignIn.css'
 
 /**
- * Component React which display the navigation's buttons on the header
+ * Component React which displays the sign in page of the app
  * @component
  */
 
-const Header = () => {
+const SignIn = () => {
     return (
-        &lt;header className="header">
-            &lt;h1 className="sr-only">Argent Bank&lt;/h1>
-            &lt;ul className="headerNav">
-                &lt;Link className="logo" to="/" >
-                    &lt;img src={logo} alt="Argent Bank logo" />
-                &lt;/Link>
-                &lt;div className="signButton">
-                    &lt;FaUserCircle className="userIcon" />
-                    &lt;NavLink className={'navButton'} exact to='/SignIn '>
-                        Sign In
-                    &lt;/NavLink>
-                &lt;/div>
-                
-            &lt;/ul>
-        &lt;/header>
+        &lt;div className="mainSignIn">
+            &lt;Header />
+            &lt;div className="signInBlock">
+                &lt;SignInForm />
+            &lt;/div>            
+            &lt;Footer />
+        &lt;/div>
     )
 }
 
-export default Header</code></pre>
+export default SignIn</code></pre>
         </article>
     </section>
 

@@ -12,7 +12,7 @@ import security from '../../assets/icon-security.png'
 import '../Homepage/Homepage.css'
 
 /**
- * Component React that displays the homepage of the app
+ * Component React which displays the homepage of the app
  * @component
  */
 

@@ -1,0 +1,14 @@
+.mainSignIn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;   
+    height: 100vh;
+}
+
+.signInBlock {
+    display: flex;
+    flex: 3;
+    background-color: #12002b;
+    padding: 30px;
+}
+
