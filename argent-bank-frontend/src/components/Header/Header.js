@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import { FaUserCircle } from "react-icons/fa"
 
 import logo from '../../assets/argentBankLogo.png'
@@ -21,9 +21,9 @@ const Header = () => {
                 </Link>
                 <div className="signButton">
                     <FaUserCircle className="userIcon" />
-                    <button className={'navButton'} to=' '>
+                    <NavLink className={'navButton'} exact to='/SignIn '>
                         Sign In
-                    </button>
+                    </NavLink>
                 </div>
                 
             </ul>

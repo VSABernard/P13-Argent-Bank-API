@@ -355,7 +355,7 @@ function linktoExternal(longName, name) {
  */
 function buildNav(members) {
     let globalNav;
-    let nav = '<h2><a href="index.html"><img src="../docs/custom-template/assets/logo.png"></a></h2>';
+    let nav = '<h2><a href="index.html"><img src="../custom-template/assets/logo.png" ></a></h2>';
     const seen = {};
     const seenTutorials = {};
 
