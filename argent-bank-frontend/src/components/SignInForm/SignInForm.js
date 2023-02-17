@@ -1,7 +1,10 @@
-import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import React, { useState } from "react"
+import Form from "react-bootstrap/Form"
+import Button from "react-bootstrap/Button"
 import { FaUserCircle } from "react-icons/fa"
+import { NavLink } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
+import { signIn, setUser } from "../../actions/Action"
 
 import "../SignInForm/SignInForm.css"
 
@@ -21,6 +24,11 @@ function SignInForm () {
     const [password, setPassword] = useState("")
 
     /**
+     * The dispatch is used to send actions to the reducer
+     */
+    const dispatch = useDispatch()
+
+    /**
      * The submit button is linked up with the state by using a validate function called validateForm.
      * @function
      */
@@ -34,6 +42,12 @@ function SignInForm () {
      */
     function handleSubmit(event) {
         event.preventDefault()
+
+        let email = event.target.querySelector('input#email.form-control').defaultValue
+        let password = event.target.querySelector('input#password.form-control').defaultValue
+        
+        dispatch(signIn())
+        dispatch(setUser({firstName: 'Tony',lastName: 'Jarvis',email: email ,password: password }))        
     }
 
     return (
@@ -46,7 +60,7 @@ function SignInForm () {
                     <Form.Group className="formLine" size="lg" controlId="email">
                         <Form.Label className="formLabel">Username</Form.Label>
                         <Form.Control autofocus type="email" value={email}
-                            onChange={(e) => setEmail(e.target.value)} />
+                            onChange={(e) => setEmail(e.target.value)} />                            
                     </Form.Group>
 
                     <Form.Group className="formLine" size="lg" controlId="password">
@@ -60,10 +74,12 @@ function SignInForm () {
                         <label htmlFor="rememberMe">Remember me</label>
                     </div>
                 </div>
-
                 <Button className="buttonSignInForm" block="true" size="lg" type="submit" disabled={!validateForm()}>
-                    Sign In
+                    <NavLink className={'navButtonSignIn'} exact to='/Dashboard'>
+                        Sign In
+                    </NavLink>
                 </Button>
+                
             </Form>
         </div>
     )

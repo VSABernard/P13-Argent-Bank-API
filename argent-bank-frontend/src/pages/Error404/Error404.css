@@ -1,0 +1,44 @@
+.error-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.error-title { 
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 150px;
+    line-height: 410px;
+    text-align: center;
+    color: #00bc77;
+    margin: auto;
+    width: auto;
+    height: 250px;
+}
+
+.error-content {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 142.6%;
+    text-align: center;
+    color: #00bc77;
+    margin: 200px auto;
+    width: 872px;
+    height: 51px;
+}
+
+.error-link {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 142.6%;
+    color: #00bc77;
+    text-align: center;
+    margin: -200px auto;
+    text-decoration: underline;
+    width: 284px;
+    height: 26px;
+}

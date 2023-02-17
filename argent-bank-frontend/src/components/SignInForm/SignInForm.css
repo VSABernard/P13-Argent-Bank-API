@@ -72,7 +72,13 @@ input {
     margin-bottom: 20px;
     border-color: #00bc77;
     background-color: #00bc77;
-    color: #fff;
+}
+
+.navButtonSignIn {
+    color: black;
+    background-color: #00bc77;
+    border-color: #00bc77;
+    text-decoration: none;
 }
 
 .buttonSignInForm:hover {

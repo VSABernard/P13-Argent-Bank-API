@@ -1,6 +1,7 @@
 import React from "react"
 import { Link, NavLink } from "react-router-dom"
 import { FaUserCircle } from "react-icons/fa"
+import { useSelector } from "react-redux"
 
 import logo from '../../assets/argentBankLogo.png'
 
@@ -12,6 +13,9 @@ import '../Header/Header.css'
  */
 
 const Header = () => {
+
+    const isLogged = useSelector(state => state.isLogged)
+
     return (
         <header className="header">
             <h1 className="sr-only">Argent Bank</h1>
@@ -21,9 +25,16 @@ const Header = () => {
                 </Link>
                 <div className="signButton">
                     <FaUserCircle className="userIcon" />
-                    <NavLink className={'navButton'} exact to='/SignIn '>
-                        Sign In
-                    </NavLink>
+                    {!isLogged && 
+                        <NavLink className={'navButton'} exact to='/SignIn'>
+                            Sign In
+                        </NavLink>
+                    }
+                    {isLogged && 
+                        <NavLink className={'navButton'} exact to='/'>
+                            Sign Out
+                        </NavLink>
+                    }
                 </div>
                 
             </ul>

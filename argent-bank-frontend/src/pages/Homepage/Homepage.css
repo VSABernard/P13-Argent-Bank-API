@@ -19,13 +19,13 @@
   
 .hero-content {
     position: relative;
-    top: 20%;
-    left: 70%;
+    top: 22%;
+    left: 68%;
     right: 0;
     height: auto;
-    width: 300px;
+    width: 400px;
     background: white;
-    padding: 2rem;
+    padding: 25px;
     text-align: left;
 }
 
