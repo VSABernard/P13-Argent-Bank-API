@@ -1,8 +1,8 @@
 import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import { FaUserCircle } from "react-icons/fa"
-import { NavLink } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { signIn, setUser } from "../../actions/Action"
 
@@ -22,6 +22,11 @@ function SignInForm () {
      */
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+
+    /**
+     * The hook that comes with React Router that will allow us to use the browser’s History API.
+     */
+    const nav = useNavigate()
 
     /**
      * The dispatch is used to send actions to the reducer
@@ -47,7 +52,8 @@ function SignInForm () {
         let password = event.target.querySelector('input#password.form-control').defaultValue
         
         dispatch(signIn())
-        dispatch(setUser({firstName: 'Tony',lastName: 'Jarvis',email: email ,password: password }))        
+        dispatch(setUser({firstName: 'Tony',lastName: 'Jarvis',email: email ,password: password }))   
+        nav('/Dashboard')
     }
 
     return (
@@ -74,10 +80,9 @@ function SignInForm () {
                         <label htmlFor="rememberMe">Remember me</label>
                     </div>
                 </div>
+
                 <Button className="buttonSignInForm" block="true" size="lg" type="submit" disabled={!validateForm()}>
-                    <NavLink className={'navButtonSignIn'} exact to='/Dashboard'>
-                        Sign In
-                    </NavLink>
+                    Sign In
                 </Button>
                 
             </Form>

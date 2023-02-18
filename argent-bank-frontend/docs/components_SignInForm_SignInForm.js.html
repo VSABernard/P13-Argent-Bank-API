@@ -26,10 +26,13 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+            <pre class="prettyprint source linenums"><code>import React, { useState } from "react"
+import Form from "react-bootstrap/Form"
+import Button from "react-bootstrap/Button"
 import { FaUserCircle } from "react-icons/fa"
+import { NavLink } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { signIn, setUser } from "../../actions/Action"
 
 import "../SignInForm/SignInForm.css"
 
@@ -40,16 +43,21 @@ import "../SignInForm/SignInForm.css"
 
 function SignInForm () {
     /**
-     * We are using the useState hook to store what the user enters in the form.
-     * We then connect the state to our two fields in the form using the setEmail and setPassword functions
+     * The useState hook is used to store what the user enters in the form.
+     * The state the connected to the two fields in the form using the setEmail and setPassword functions
      * to store what the user types in — e.target.value.
-     * We are setting the autoFocus flag for our fields, so that when our form loads, it sets focus to this field.
+     * The autoFocus flag is setted for our fields, so that when the form loads, it sets focus to this field.
      */
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
     /**
-     * We also link up our submit button with our state by using a validate function called validateForm.
+     * The dispatch is used to send actions to the reducer
+     */
+    const dispatch = useDispatch()
+
+    /**
+     * The submit button is linked up with the state by using a validate function called validateForm.
      * @function
      */
     function validateForm() {
@@ -57,11 +65,17 @@ function SignInForm () {
     }
 
     /**
-     * We trigger our callback handleSubmit when the form is submitted.
+     * The callback handleSubmit is triggered when the form is submitted.
      * @param {*} event 
      */
     function handleSubmit(event) {
         event.preventDefault()
+
+        let email = event.target.querySelector('input#email.form-control').defaultValue
+        let password = event.target.querySelector('input#password.form-control').defaultValue
+        
+        dispatch(signIn())
+        dispatch(setUser({firstName: 'Tony',lastName: 'Jarvis',email: email ,password: password }))        
     }
 
     return (
@@ -69,11 +83,12 @@ function SignInForm () {
             &lt;Form onSubmit={handleSubmit}>
                 &lt;FaUserCircle className="userIcon" />
                 &lt;h1 className="signInTitle">Sign In&lt;/h1>
+
                 &lt;div className="formGroup">
                     &lt;Form.Group className="formLine" size="lg" controlId="email">
                         &lt;Form.Label className="formLabel">Username&lt;/Form.Label>
                         &lt;Form.Control autofocus type="email" value={email}
-                            onChange={(e) => setEmail(e.target.value)} />
+                            onChange={(e) => setEmail(e.target.value)} />                            
                     &lt;/Form.Group>
 
                     &lt;Form.Group className="formLine" size="lg" controlId="password">
@@ -87,12 +102,13 @@ function SignInForm () {
                         &lt;label htmlFor="rememberMe">Remember me&lt;/label>
                     &lt;/div>
                 &lt;/div>
-
                 &lt;Button className="buttonSignInForm" block="true" size="lg" type="submit" disabled={!validateForm()}>
-                    Sign In
+                    &lt;NavLink className={'navButtonSignIn'} exact to='/Dashboard'>
+                        Sign In
+                    &lt;/NavLink>
                 &lt;/Button>
+                
             &lt;/Form>
-
         &lt;/div>
     )
 }
@@ -107,13 +123,13 @@ export default SignInForm</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html"><img src="../custom-template/assets/logo.png" ></a></h2><h3>Global</h3><ul><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Homepage">Homepage</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SignInForm">SignInForm</a></li></ul>
+    <h2><a href="index.html"><img src="../custom-template/assets/logo.png" ></a></h2><h3>Global</h3><ul><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#DashboardAccount">DashboardAccount</a></li><li><a href="global.html#DashboardHeader">DashboardHeader</a></li><li><a href="global.html#Error404">Error404</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Homepage">Homepage</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SignInForm">SignInForm</a></li><li><a href="global.html#allReducers">allReducers</a></li><li><a href="global.html#loggedReducer">loggedReducer</a></li><li><a href="global.html#signIn">signIn</a></li><li><a href="global.html#userReducer">userReducer</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Fri Feb 17 2023 17:04:49 GMT+0100 (GMT+01:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Sat Feb 18 2023 21:56:12 GMT+0100 (GMT+01:00)
 </footer>
 
 <script> prettyPrint(); </script>

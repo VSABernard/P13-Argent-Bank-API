@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: App.js</title>
+    <title>JSDoc: Source: components/DashboardHeader/DashboardHeader.js</title>
     <link rel="icon" href="../custom-template/assets/favicon.png" />  
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -27,36 +27,42 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from 'react'
-import { BrowserRouter, Route, Routes} from 'react-router-dom'
+import { Link, NavLink } from "react-router-dom"
+import { FaUserCircle, FaSignOutAlt } from "react-icons/fa"
 
-import Homepage from './pages/Homepage/Homepage'
-import SignIn from './pages/SignIn/SignIn'
-import Dashboard from './pages/Dashboard/Dashboard'
-import Error404 from './pages/Error404/Error404'
+import logo from '../../assets/argentBankLogo.png'
 
-import './App.css'
+import '../../components/DashboardHeader/DashboardHeader.css'
 
-/** 
- * @file App.js is the root file for this app. &lt;br>
- * * @author Veronica BERNARD
- * @see &lt;a href="https://github.com/VSABernard">My GitHub&lt;/a>
+/**
+ * Component React which display the navigation's buttons on the header od the dashboard page
+ * @component
  */
 
-const App= () => {
-  return (
-    &lt;BrowserRouter>
-        &lt;Routes>
-          &lt;Route path="/" element={&lt;Homepage/>} /> 
-          &lt;Route path="/SignIn" element={&lt;SignIn/>} />
-          &lt;Route path="/Dashboard" element={&lt;Dashboard/>}/>          
-          &lt;Route path="*" element={&lt;Error404/>} />  
-        &lt;/Routes>
-    &lt;/BrowserRouter>    
-  )
+const DashboardHeader = () => {
+    return (
+        &lt;header className="headerDashboard">
+            &lt;h1 className="srOnly">Argent Bank&lt;/h1>
+            &lt;ul className="headerNav">
+                &lt;Link className="logo" to="/" >
+                    &lt;img src={logo} alt="Argent Bank logo" />
+                &lt;/Link>
+                &lt;div className="signButton">
+                    &lt;div className='userFirtsname'>
+                        &lt;FaUserCircle className="userIcon" />
+                        &lt;p>Tony&lt;/p>
+                    &lt;/div>
+                    &lt;NavLink className={'navButtonSignout'} exact to='/'>
+                        &lt;FaSignOutAlt className='signoutIcon' />
+                        Sign Out
+                    &lt;/NavLink>
+                &lt;/div>                
+            &lt;/ul>
+        &lt;/header>
+    )
 }
 
-export default App
-</code></pre>
+export default DashboardHeader</code></pre>
         </article>
     </section>
 

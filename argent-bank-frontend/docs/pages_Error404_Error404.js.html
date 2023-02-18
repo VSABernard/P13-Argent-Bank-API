@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: App.js</title>
+    <title>JSDoc: Source: pages/Error404/Error404.js</title>
     <link rel="icon" href="../custom-template/assets/favicon.png" />  
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -26,37 +26,30 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from 'react'
-import { BrowserRouter, Route, Routes} from 'react-router-dom'
+            <pre class="prettyprint source linenums"><code>import { Link } from "react-router-dom"
+import '../Error404/Error404.css'
 
-import Homepage from './pages/Homepage/Homepage'
-import SignIn from './pages/SignIn/SignIn'
-import Dashboard from './pages/Dashboard/Dashboard'
-import Error404 from './pages/Error404/Error404'
-
-import './App.css'
-
-/** 
- * @file App.js is the root file for this app. &lt;br>
- * * @author Veronica BERNARD
- * @see &lt;a href="https://github.com/VSABernard">My GitHub&lt;/a>
+/**
+ * Component React that displays the page Error 404
+ * @function 
  */
-
-const App= () => {
+function Error404() {
   return (
-    &lt;BrowserRouter>
-        &lt;Routes>
-          &lt;Route path="/" element={&lt;Homepage/>} /> 
-          &lt;Route path="/SignIn" element={&lt;SignIn/>} />
-          &lt;Route path="/Dashboard" element={&lt;Dashboard/>}/>          
-          &lt;Route path="*" element={&lt;Error404/>} />  
-        &lt;/Routes>
-    &lt;/BrowserRouter>    
+    &lt;div> 
+        &lt;section className="error-section">
+            &lt;h1 className="error-title">Error 404 !&lt;/h1>
+            &lt;p className="error-content">
+                The page you requested does not exist.
+            &lt;/p>
+            &lt;Link to="/">                                                       {/* Link to Homepage */}
+                &lt;p className="error-link">Go to homepage&lt;/p>
+            &lt;/Link>
+        &lt;/section>
+    &lt;/div>
   )
 }
 
-export default App
-</code></pre>
+export default Error404</code></pre>
         </article>
     </section>
 

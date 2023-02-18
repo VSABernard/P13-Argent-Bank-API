@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: App.js</title>
+    <title>JSDoc: Source: reducers/isLoggedReducer.js</title>
     <link rel="icon" href="../custom-template/assets/favicon.png" />  
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -26,37 +26,22 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from 'react'
-import { BrowserRouter, Route, Routes} from 'react-router-dom'
-
-import Homepage from './pages/Homepage/Homepage'
-import SignIn from './pages/SignIn/SignIn'
-import Dashboard from './pages/Dashboard/Dashboard'
-import Error404 from './pages/Error404/Error404'
-
-import './App.css'
-
-/** 
- * @file App.js is the root file for this app. &lt;br>
- * * @author Veronica BERNARD
- * @see &lt;a href="https://github.com/VSABernard">My GitHub&lt;/a>
+            <pre class="prettyprint source linenums"><code>/**
+ * The functions in Redux that take the curent state and an action and return a new state.
+ * To know if an user is connected. * 
+ * @param { Object } state A boolean 
+ * @param { Object } action Sign in
  */
-
-const App= () => {
-  return (
-    &lt;BrowserRouter>
-        &lt;Routes>
-          &lt;Route path="/" element={&lt;Homepage/>} /> 
-          &lt;Route path="/SignIn" element={&lt;SignIn/>} />
-          &lt;Route path="/Dashboard" element={&lt;Dashboard/>}/>          
-          &lt;Route path="*" element={&lt;Error404/>} />  
-        &lt;/Routes>
-    &lt;/BrowserRouter>    
-  )
+const loggedReducer = (state = false, action) => {
+    switch (action.type) {
+        case 'SIGN_IN':
+            return !state 
+        default:
+            return state
+    }
 }
 
-export default App
-</code></pre>
+export default loggedReducer</code></pre>
         </article>
     </section>
 

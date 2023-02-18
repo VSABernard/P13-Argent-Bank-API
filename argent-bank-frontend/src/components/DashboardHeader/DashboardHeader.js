@@ -1,6 +1,10 @@
 import React from 'react'
-import { Link, NavLink } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
 import { FaUserCircle, FaSignOutAlt } from "react-icons/fa"
+import Form from "react-bootstrap/Form"
+import Button from "react-bootstrap/Button"
+import { signOut } from "../../actions/Action"
 
 import logo from '../../assets/argentBankLogo.png'
 
@@ -12,6 +16,32 @@ import '../../components/DashboardHeader/DashboardHeader.css'
  */
 
 const DashboardHeader = () => {
+    /**
+     * Get the user profile from the state
+     */
+    const user = useSelector(state => state.user)
+
+    /**
+     * The hook that comes with React Router that will allow us to use the browser’s History API.
+     */
+    const nav = useNavigate()
+
+    /**
+     * The dispatch is used to send actions to the reducer
+     */
+    const dispatch = useDispatch()
+
+    /**
+     * The callback handleSubmit is triggered when the form is submitted.
+     * @param {*} event 
+     */
+    function handleSubmit(event) {
+        event.preventDefault()
+        
+        dispatch(signOut())
+        nav('/')
+    }
+
     return (
         <header className="headerDashboard">
             <h1 className="srOnly">Argent Bank</h1>
@@ -19,15 +49,17 @@ const DashboardHeader = () => {
                 <Link className="logo" to="/" >
                     <img src={logo} alt="Argent Bank logo" />
                 </Link>
-                <div className="signButton">
+                <div className="signOut">
                     <div className='userFirtsname'>
                         <FaUserCircle className="userIcon" />
-                        <p>Tony</p>
+                        <p>{ user.firstName }</p>
                     </div>
-                    <NavLink className={'navButtonSignout'} exact to='/'>
+                    <Form className='signOutBlock' onSubmit={handleSubmit}>
                         <FaSignOutAlt className='signoutIcon' />
-                        Sign Out
-                    </NavLink>
+                        <Button className="buttonSignOut" block="true" size="lg" type="submit" >
+                            Sign Out
+                        </Button>
+                    </Form>
                 </div>                
             </ul>
         </header>
