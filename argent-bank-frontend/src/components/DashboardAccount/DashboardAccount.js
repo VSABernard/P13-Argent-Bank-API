@@ -1,4 +1,8 @@
 import React from 'react'
+import axios from 'axios'
+import { useSelector, useDispatch } from "react-redux"
+
+import { profileSuccesful, profileFailed } from '../../actions/Action'
 
 import '../../components/DashboardAccount/DashboardAccount.css'
 
@@ -8,10 +12,55 @@ import '../../components/DashboardAccount/DashboardAccount.css'
  */
 
 const DashboardAccount = () => {
+    /**
+     * Get the user's token from the state
+     */
+    const token = useSelector(state => state.token)
+    const body = {}
+    const config = { 
+        headers: { Authorization: `Bearer ${token}`}
+    }
+    const url = 'http://localhost:3001/api/v1/user/profile'
+    // console.log('dashboard post /user/profile')
+
+    /**
+     * Get the user profile from the state
+     */
+    const user = useSelector(state => state.user)
+
+    /**
+     * The dispatch is used to send actions to the reducer
+     */
+    const dispatch = useDispatch()
+
+    /**
+     * Get user's profile from API with token as header's parameter
+     */
+    try{
+        axios.post (url, body, config)
+            .then(response => {
+                // console.log(response.data)
+                
+                let user = {
+                    firstName : response.data.body.firstName,
+                    lastName : response.data.body.lastName,
+                    email : response.data.body.email,
+                }
+                
+                dispatch(profileSuccesful(user))
+            })
+            .catch (error => {
+                console.log(error)
+            })
+        
+    } catch (error) {
+        dispatch(profileFailed(error))
+    }
+
     return (
         <main className="mainAccount">
             <div className="header">
-                <h1>Welcome back<br />Tony Jarvis!</h1>
+                <h1>Welcome back<br />{ user.firstName } { user.lastName }!</h1>
                 <button className="editButton">Edit Name</button>
             </div>
 

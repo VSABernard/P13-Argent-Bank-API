@@ -1,18 +1,20 @@
+import { LOGIN_SUCCESFUL, LOGIN_FAILED } from '../actions/Action'
+
 /**
  * The functions in Redux that take the curent state and an action and return a new state.
  * To know if an user is connected. * 
  * @param { Object } state A boolean 
  * @param { Object } action Sign in
  */
-const loggedReducer = (state = false, action) => {
+const loginReducer = (state = null, action) => {
     switch (action.type) {
-        case 'SIGN_IN':
-            return true 
-        case 'SIGN_OUT':
-            return false
+        case LOGIN_SUCCESFUL:
+            return action.payload 
+        case LOGIN_FAILED:
+            return null
         default:
             return state
     }
 }
 
-export default loggedReducer
+export default loginReducer

@@ -1,8 +1,9 @@
+import { PROFILE_SUCCESFUL, PROFILE_FAILED } from '../actions/Action'
+
 const userState = {
     firstName: '',
     lastName: '',
-    email: '',
-    password: ''
+    email: ''
 }
 
 /**
@@ -13,8 +14,10 @@ const userState = {
  */
 const userReducer = (state = userState, action) => {
     switch (action.type) {
-        case 'SET_USER':
+        case PROFILE_SUCCESFUL:
             return {...state, ...action.payload}
+        case PROFILE_FAILED:
+            return state
         default:
             return state
     }

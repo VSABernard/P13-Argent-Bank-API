@@ -1,10 +1,12 @@
 import React, { useState } from "react"
+import axios from 'axios'
 import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 import { FaUserCircle } from "react-icons/fa"
-import { useDispatch } from "react-redux"
-import { signIn, setUser } from "../../actions/Action"
+import { loginSuccesful, loginFailed } from "../../actions/Action"
 
 import "../SignInForm/SignInForm.css"
 
@@ -50,10 +52,34 @@ function SignInForm () {
 
         let email = event.target.querySelector('input#email.form-control').defaultValue
         let password = event.target.querySelector('input#password.form-control').defaultValue
+                
+        const parameters = {
+            email: email,
+            password: password
+        }
+        const url = 'http://localhost:3001/api/v1/user/login'
+        let token = null
+        // console.log('signin form post /user/login')
         
-        dispatch(signIn())
-        dispatch(setUser({firstName: 'Tony',lastName: 'Jarvis',email: email ,password: password }))   
-        nav('/Dashboard')
+        /**
+         * Get user's token from API
+         */
+        try{
+            axios.post (url, parameters)
+                .then(response => {
+                    // console.log(response.data)
+                    token = response.data.body.token
+
+                    dispatch(loginSuccesful(token)) 
+                    nav('/Dashboard')
+                })
+                .catch (error => {
+                    console.log(error)
+                })
+            
+        } catch (error) {
+           dispatch(loginFailed(error))
+        }   
     }
 
     return (
