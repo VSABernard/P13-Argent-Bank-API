@@ -56,7 +56,7 @@ function SignInForm () {
                 
         let token = await login( email, password )
         
-        if (token != null) {
+        if ( token != null ) {
             dispatch(loginSuccesful(token))
             nav('/Dashboard')
         } else {
