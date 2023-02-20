@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { useSelector, useDispatch } from "react-redux"
 
-import { profileSuccesful, profileFailed } from '../../actions/Action'
+import { profileSuccesful, profileFailed } from '../../features/featuresUser/actions/Action'
 
 import '../../components/DashboardAccount/DashboardAccount.css'
 

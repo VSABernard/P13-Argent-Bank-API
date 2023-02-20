@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { FaUserCircle, FaSignOutAlt } from "react-icons/fa"
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
-import { signOut } from "../../actions/Action"
+import { signOut } from "../../features/featuresUser/actions/Action"
 
 import logo from '../../assets/argentBankLogo.png'
 
