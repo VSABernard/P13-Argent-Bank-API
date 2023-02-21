@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: App.js</title>
+    <title>JSDoc: Source: pages/EditName/EditName.js</title>
     <link rel="icon" href="../custom-template/assets/favicon.png" />  
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -27,38 +27,32 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from 'react'
-import { BrowserRouter, Route, Routes} from 'react-router-dom'
 
-import Homepage from './pages/Homepage/Homepage'
-import SignIn from './pages/SignIn/SignIn'
-import Dashboard from './pages/Dashboard/Dashboard'
-import Error404 from './pages/Error404/Error404'
+import Header from '../../components/Header/Header'
+import Footer from '../../components/Footer/Footer'
+import EditNameForm from '../../components/EditNameForm/EditNameForm'
 
-import './App.css'
-import EditName from './pages/EditName/EditName'
+import '../EditName/EditName.css'
 
-/** 
- * @file App.js is the root file for this app. &lt;br>
- * * @author Veronica BERNARD
- * @see &lt;a href="https://github.com/VSABernard">My GitHub&lt;/a>
+/**
+ * Component React which displays the page to edit the user's name
+ * @component
  */
 
-const App= () => {
-  return (
-    &lt;BrowserRouter>
-        &lt;Routes>
-          &lt;Route path="/" element={&lt;Homepage/>} /> 
-          &lt;Route path="/SignIn" element={&lt;SignIn/>} />
-          &lt;Route path="/Dashboard" element={&lt;Dashboard/>}/>   
-          &lt;Route path="/EditName" element={&lt;EditName/>}/>        
-          &lt;Route path="*" element={&lt;Error404/>} />  
-        &lt;/Routes>
-    &lt;/BrowserRouter>    
-  )
+const EditName = () => {
+    return (
+        &lt;div className='editName'>
+            &lt;Header />
+            &lt;section className='editNameContent'>
+                &lt;EditNameForm />
+            &lt;/section>
+            &lt;Footer />
+        &lt;/div>
+        
+    ) 
 }
 
-export default App
-</code></pre>
+export default EditName</code></pre>
         </article>
     </section>
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: App.js</title>
+    <title>JSDoc: Source: features/featuresUser/actions/Action.js</title>
     <link rel="icon" href="../custom-template/assets/favicon.png" />  
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -26,38 +26,66 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from 'react'
-import { BrowserRouter, Route, Routes} from 'react-router-dom'
-
-import Homepage from './pages/Homepage/Homepage'
-import SignIn from './pages/SignIn/SignIn'
-import Dashboard from './pages/Dashboard/Dashboard'
-import Error404 from './pages/Error404/Error404'
-
-import './App.css'
-import EditName from './pages/EditName/EditName'
-
-/** 
- * @file App.js is the root file for this app. &lt;br>
- * * @author Veronica BERNARD
- * @see &lt;a href="https://github.com/VSABernard">My GitHub&lt;/a>
+            <pre class="prettyprint source linenums"><code>/**
+ * JavaScript objects that describe changes to the state.
+ * @function
  */
 
-const App= () => {
-  return (
-    &lt;BrowserRouter>
-        &lt;Routes>
-          &lt;Route path="/" element={&lt;Homepage/>} /> 
-          &lt;Route path="/SignIn" element={&lt;SignIn/>} />
-          &lt;Route path="/Dashboard" element={&lt;Dashboard/>}/>   
-          &lt;Route path="/EditName" element={&lt;EditName/>}/>        
-          &lt;Route path="*" element={&lt;Error404/>} />  
-        &lt;/Routes>
-    &lt;/BrowserRouter>    
-  )
+export const LOGIN_SUCCESFUL = 'loginSuccesful'
+export const LOGIN_FAILED = 'loginFailed'
+export const SIGN_OUT = 'signOut'
+export const PROFILE_SUCCESFUL = 'profileSuccesful'
+export const PROFILE_FAILED = 'profileFailed'
+export const UPDATE_SUCCESFUL = 'profileSuccesful'
+export const UPDATE_FAILED = 'profileFailed'
+
+export const loginSuccesful = (token) => {
+    return {
+        type: LOGIN_SUCCESFUL,
+        payload: token
+    }
 }
 
-export default App
+export const loginFailed = (error) => {
+    return {
+        type : LOGIN_FAILED,
+        payload : error
+    }
+}
+
+export const signOut = () => {
+    return {
+        type: SIGN_OUT
+    }
+}
+
+export const profileSuccesful = (user) => {
+    return {
+        type: PROFILE_SUCCESFUL,
+        payload: user
+    }
+}
+
+export const profileFailed = (error) => {
+    return {
+        type: PROFILE_FAILED,
+        payload: error
+    }
+}
+
+export const updateSuccesful = (user) => {
+    return {
+        type: UPDATE_SUCCESFUL,
+        payload: user
+    }
+}
+
+export const updateFailed = (error) => {
+    return {
+        type: UPDATE_FAILED,
+        payload: error
+    }
+}
 </code></pre>
         </article>
     </section>

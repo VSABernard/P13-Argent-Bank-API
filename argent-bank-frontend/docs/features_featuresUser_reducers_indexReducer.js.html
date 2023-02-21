@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: App.js</title>
+    <title>JSDoc: Source: features/featuresUser/reducers/indexReducer.js</title>
     <link rel="icon" href="../custom-template/assets/favicon.png" />  
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -26,39 +26,20 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from 'react'
-import { BrowserRouter, Route, Routes} from 'react-router-dom'
+            <pre class="prettyprint source linenums"><code>import loginReducer from "./loginReducer"
 
-import Homepage from './pages/Homepage/Homepage'
-import SignIn from './pages/SignIn/SignIn'
-import Dashboard from './pages/Dashboard/Dashboard'
-import Error404 from './pages/Error404/Error404'
+import { combineReducers } from "redux"
+import userReducer from "./userReducer"
 
-import './App.css'
-import EditName from './pages/EditName/EditName'
-
-/** 
- * @file App.js is the root file for this app. &lt;br>
- * * @author Veronica BERNARD
- * @see &lt;a href="https://github.com/VSABernard">My GitHub&lt;/a>
+/**
+ * The combination of the functions in Redux 
  */
+const allReducers = combineReducers({
+    token : loginReducer,  
+    user: userReducer
+})
 
-const App= () => {
-  return (
-    &lt;BrowserRouter>
-        &lt;Routes>
-          &lt;Route path="/" element={&lt;Homepage/>} /> 
-          &lt;Route path="/SignIn" element={&lt;SignIn/>} />
-          &lt;Route path="/Dashboard" element={&lt;Dashboard/>}/>   
-          &lt;Route path="/EditName" element={&lt;EditName/>}/>        
-          &lt;Route path="*" element={&lt;Error404/>} />  
-        &lt;/Routes>
-    &lt;/BrowserRouter>    
-  )
-}
-
-export default App
-</code></pre>
+export default allReducers</code></pre>
         </article>
     </section>
 

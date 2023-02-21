@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-import CloseButton from 'react-bootstrap/CloseButton'
+import { Form, Button, CloseButton } from 'react-bootstrap'
 
 import { update } from '../../services/userService'
 import { updateSuccesful, updateFailed } from '../../features/featuresUser/actions/Action'
@@ -13,11 +11,13 @@ import '../EditNameForm/EditNameForm.css'
 /**
  * Component React which displays the edit form of the user's name
  * @component
+ * @param {*} show open the editing modal
+ * @param {*} close close the editing modal
  */
 
-const EditNameForm = () => {
-   
-     /**
+const EditNameForm = ({ show, close }) => {
+
+    /**
      * Get the user profile from the state
      */
      const user = useSelector(state => state.user)  
@@ -71,42 +71,39 @@ const EditNameForm = () => {
             dispatch(updateFailed("Error"))
         }
     }
-    
-    /**
-     * If a close button is clicked, user will return to Dashboard
-     */
-    function buttonOut() {
-        nav('/Dashboard')
-    }
-    
+        
     return (
-        <Form className='editNameForm' onSubmit={handleSubmitEditName}>
-            <div className='editNameHeader'>
-                <h1 className="editTitle">Edit Name</h1>
-                <CloseButton className="buttonOut" onClick={buttonOut}>
-                    X
-                </CloseButton>             
-            </div>            
+        <> {
+            show ?
+        
+        <div className='modalEditName' onClick={() => close()}>
+            <Form className='editNameForm' onSubmit={handleSubmitEditName} onClick={(e) => e.stopPropagation()}>      
+                <div methode='get' className='editNameBlock'>
+                    <Form.Group className="formLine" size="lg" controlId="firstName">
+                        <Form.Control autofocus type="text" placeholder={ userFirstName }
+                            onChange={(e) => setFirstName(e.target.value)} />
+                    </Form.Group>
 
-            <div methode='get' className='editNameBlock'>
-                <Form.Group className="formLine" size="lg" controlId="firstName">
-                    <Form.Label className="formLabel">Firstname</Form.Label>
-                    <Form.Control autofocus type="text" placeholder={ userFirstName }
-                        onChange={(e) => setFirstName(e.target.value)} />
-                </Form.Group>
+                    <Form.Group className="formLine" size="lg" controlId="lastName">
+                        <Form.Control autofocus type="text" placeholder={ userLastName }
+                            onChange={(e) => setLastName(e.target.value)} />
+                    </Form.Group>
+                </div>
 
-                <Form.Group className="formLine" size="lg" controlId="lastName">
-                    <Form.Label className="formLabel">Lastname</Form.Label>
-                    <Form.Control autofocus type="text" placeholder={ userLastName }
-                        onChange={(e) => setLastName(e.target.value)} />
-                </Form.Group>
-            </div>
+                <div className='buttonsSection'>
+                    <Button className="buttonSave" block="true" size="lg" type="submit" disabled={!validateFormName()}>
+                        Save
+                    </Button>
+                    <CloseButton className="buttonOut" onClick={() => close()}>
+                        Cancel
+                    </CloseButton> 
+                </div>
+            </Form>     
+        </div>  
 
-            <Button className="buttonSave" block="true" size="lg" type="submit" disabled={!validateFormName()}>
-                Submit
-            </Button>
-
-        </Form>        
+        : null 
+        }
+        </> 
     ) 
 }
 

@@ -7,7 +7,6 @@ import Dashboard from './pages/Dashboard/Dashboard'
 import Error404 from './pages/Error404/Error404'
 
 import './App.css'
-import EditName from './pages/EditName/EditName'
 
 /** 
  * @file App.js is the root file for this app. <br>
@@ -22,7 +21,6 @@ const App= () => {
           <Route path="/" element={<Homepage/>} /> 
           <Route path="/SignIn" element={<SignIn/>} />
           <Route path="/Dashboard" element={<Dashboard/>}/>   
-          <Route path="/EditName" element={<EditName/>}/>        
           <Route path="*" element={<Error404/>} />  
         </Routes>
     </BrowserRouter>    

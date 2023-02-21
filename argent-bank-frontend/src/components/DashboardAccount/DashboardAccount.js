@@ -1,9 +1,10 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { NavLink } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 
 import { profileSuccesful, profileFailed } from '../../features/featuresUser/actions/Action'
 import { profile } from "../../services/userService"
+import EditNameForm from '../EditNameForm/EditNameForm'
 
 import '../../components/DashboardAccount/DashboardAccount.css'
 
@@ -43,16 +44,19 @@ const DashboardAccount = () => {
      */
     const user = useSelector(state => state.user)    
 
+    const [modal, setModal] = useState(false)
+    const Toggle = () => setModal(!modal)
+
     return (
         <main className="mainAccount">
             <div className="header">
-                <h1>Welcome back<br />{ user.firstName } { user.lastName }!</h1>
-                <button className="editButton">
-                    <NavLink className="editNameButton" exact to="/EditName" >
+                <h1>Welcome back<br />{ user.firstName } { user.lastName } !</h1>
+                <button className="editButton" onClick={() => Toggle()}>
                         Edit Name
-                    </NavLink>
                 </button>
+                <EditNameForm show={ modal } close={ Toggle } />
             </div>
+            
 
             <h2 className="srOnly">Accounts</h2>
             <section className="account">
