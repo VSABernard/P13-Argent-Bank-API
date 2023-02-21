@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react'
+import { NavLink } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 
 import { profileSuccesful, profileFailed } from '../../features/featuresUser/actions/Action'
@@ -46,7 +47,11 @@ const DashboardAccount = () => {
         <main className="mainAccount">
             <div className="header">
                 <h1>Welcome back<br />{ user.firstName } { user.lastName }!</h1>
-                <button className="editButton">Edit Name</button>
+                <button className="editButton">
+                    <NavLink className="editNameButton" exact to="/EditName" >
+                        Edit Name
+                    </NavLink>
+                </button>
             </div>
 
             <h2 className="srOnly">Accounts</h2>

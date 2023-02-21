@@ -8,6 +8,8 @@ export const LOGIN_FAILED = 'loginFailed'
 export const SIGN_OUT = 'signOut'
 export const PROFILE_SUCCESFUL = 'profileSuccesful'
 export const PROFILE_FAILED = 'profileFailed'
+export const UPDATE_SUCCESFUL = 'profileSuccesful'
+export const UPDATE_FAILED = 'profileFailed'
 
 export const loginSuccesful = (token) => {
     return {
@@ -43,3 +45,16 @@ export const profileFailed = (error) => {
     }
 }
 
+export const updateSuccesful = (user) => {
+    return {
+        type: UPDATE_SUCCESFUL,
+        payload: user
+    }
+}
+
+export const updateFailed = (error) => {
+    return {
+        type: UPDATE_FAILED,
+        payload: error
+    }
+}

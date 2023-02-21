@@ -55,4 +55,32 @@ export async function profile(token) {
     return user
 }
 
+/**
+ * Function which update the API /user/profile
+ * @param { String } token authorization token
+ * @
+ * @returns user's profile
+ */
+export async function update(token, firstName, lastName) {
+    const body = {
+        firstName: firstName,
+        lastName: lastName
+    }
+    const config = { 
+        headers: { Authorization: `Bearer ${token}`}
+    }
+    const url = 'http://localhost:3001/api/v1/user/profile'
 
+    let user = null
+    await axios.put (url, body, config)
+        .then(response => {            
+            user = {
+                firstName : response.data.body.firstName,
+                lastName : response.data.body.lastName,
+            }
+        })
+        .catch (error => {
+            console.log(error)
+        })
+    return user
+}
