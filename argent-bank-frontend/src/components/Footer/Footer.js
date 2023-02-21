@@ -8,7 +8,7 @@ import '../Footer/Footer.css'
 const Footer = () => {
     return (
         <footer className="footer">
-            <p className="footer-text">Copyright 2020 Argent Bank</p>
+            <p className="footer-text">Copyright 2023 Argent Bank</p>
         </footer>
     )
 }

@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { useNavigate } from "react-router-dom"
-import { useSelector, useDispatch } from "react-redux"
-import Form from "react-bootstrap/Form"
-import Button from "react-bootstrap/Button"
+import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import CloseButton from 'react-bootstrap/CloseButton'
 
-import { update } from "../../services/userService"
-import { updateSuccesful, updateFailed } from "../../features/featuresUser/actions/Action"
+import { update } from '../../services/userService'
+import { updateSuccesful, updateFailed } from '../../features/featuresUser/actions/Action'
 
 import '../EditNameForm/EditNameForm.css'
 
@@ -34,7 +35,7 @@ const EditNameForm = () => {
      * @function
      */
     function validateFormName() {
-        return firstName !==  userFirstName || lastName !== userLastName
+        return (  firstName.length > 0 && lastName.length > 0 ) && ( firstName !==  userFirstName || lastName !== userLastName )
     }
 
     /**
@@ -54,21 +55,39 @@ const EditNameForm = () => {
     async function handleSubmitEditName(event) {
         event.preventDefault()
 
-        let formFirstName = event.target.querySelector('input#firstName.form-control').defaultValue
-        let formLastName = event.target.querySelector('input#lastName.form-control').defaultValue
+        let formFirstName = event.target.querySelector('input#firstName.form-control').value
+        let formLastName = event.target.querySelector('input#lastName.form-control').value
                 
-        let result = await update( token, formFirstName, formLastName )
-        
-        if ( token != null ) {
-             dispatch(updateSuccesful(token))
-             nav('/Dashboard')
+        let userUpdate = await update( token, formFirstName, formLastName )        
+
+        if ( userUpdate != null ) {
+            /**
+             * Must keep the original email 
+             */
+            userUpdate.email = user.email
+            dispatch(updateSuccesful(userUpdate))
+            nav('/Dashboard')
         } else {
-             dispatch(updateFailed("Token error"))
+            dispatch(updateFailed("Error"))
         }
     }
-
+    
+    /**
+     * If a close button is clicked, user will return to Dashboard
+     */
+    function buttonOut() {
+        nav('/Dashboard')
+    }
+    
     return (
         <Form className='editNameForm' onSubmit={handleSubmitEditName}>
+            <div className='editNameHeader'>
+                <h1 className="editTitle">Edit Name</h1>
+                <CloseButton className="buttonOut" onClick={buttonOut}>
+                    X
+                </CloseButton>             
+            </div>            
+
             <div methode='get' className='editNameBlock'>
                 <Form.Group className="formLine" size="lg" controlId="firstName">
                     <Form.Label className="formLabel">Firstname</Form.Label>

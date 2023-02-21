@@ -58,7 +58,7 @@ export async function profile(token) {
 /**
  * Function which update the API /user/profile
  * @param { String } token authorization token
- * @
+ * @param 
  * @returns user's profile
  */
 export async function update(token, firstName, lastName) {

@@ -15,7 +15,7 @@ const EditName = () => {
     return (
         <div className='editName'>
             <Header />
-            <section className='editNameForm'>
+            <section className='editNameContent'>
                 <EditNameForm />
             </section>
             <Footer />
