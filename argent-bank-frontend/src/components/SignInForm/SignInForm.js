@@ -24,7 +24,7 @@ function SignInForm () {
      * The autoFocus flag is setted for our fields, so that when the form loads, it sets focus to this field.
      */
     const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [password, setPassword] = useState("")     
 
     /**
      * The hook that comes with React Router that will allow us to use the browser’s History API.
@@ -56,10 +56,15 @@ function SignInForm () {
                 
         let token = await login( email, password )
         
+        /**
+         * The token is saved in localStorage when the sign in is succesful
+         */
         if ( token != null ) {
             dispatch(loginSuccesful(token))
+            localStorage.setItem('token',JSON.stringify(token))
             nav('/Dashboard')
         } else {
+            localStorage.setItem('token',JSON.stringify(""))
             dispatch(loginFailed("Token error"))
         }
     }

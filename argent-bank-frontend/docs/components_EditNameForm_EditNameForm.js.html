@@ -29,9 +29,7 @@
             <pre class="prettyprint source linenums"><code>import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-import CloseButton from 'react-bootstrap/CloseButton'
+import { Form, Button, CloseButton } from 'react-bootstrap'
 
 import { update } from '../../services/userService'
 import { updateSuccesful, updateFailed } from '../../features/featuresUser/actions/Action'
@@ -41,19 +39,20 @@ import '../EditNameForm/EditNameForm.css'
 /**
  * Component React which displays the edit form of the user's name
  * @component
+ * @param {*} show The modal will only be displayed when show state is true
+ * @param {*} close Close the editing modal
  */
 
-const EditNameForm = () => {
-   
-     /**
+const EditNameForm = ({ show, close }) => {
+
+    /**
      * Get the user profile from the state
      */
      const user = useSelector(state => state.user)  
      const userFirstName = user.firstName
      const userLastName = user.lastName
 
-     const token = useSelector(state => state.token)
-   
+     const token = useSelector(state => state.token)   
    
     const [firstName, setFirstName] = useState(userFirstName)
     const [lastName, setLastName] = useState(userLastName)
@@ -99,42 +98,41 @@ const EditNameForm = () => {
             dispatch(updateFailed("Error"))
         }
     }
-    
-    /**
-     * If a close button is clicked, user will return to Dashboard
-     */
-    function buttonOut() {
-        nav('/Dashboard')
-    }
-    
+        
     return (
-        &lt;Form className='editNameForm' onSubmit={handleSubmitEditName}>
-            &lt;div className='editNameHeader'>
-                &lt;h1 className="editTitle">Edit Name&lt;/h1>
-                &lt;CloseButton className="buttonOut" onClick={buttonOut}>
-                    X
-                &lt;/CloseButton>             
-            &lt;/div>            
+        &lt;> {
+            show ?
+        
+        &lt;div className='modalEditName' onClick={() => close()}>
+            
+            {/* Whenever user clicks outside it should close the modal */}
+            &lt;Form className='editNameForm' onSubmit={handleSubmitEditName} onClick={(e) => e.stopPropagation()}>      
+                &lt;div methode='get' className='editNameBlock'>
+                    &lt;Form.Group className="formLine" size="lg" controlId="firstName">
+                        &lt;Form.Control autofocus type="text" placeholder={ userFirstName }
+                            onChange={(e) => setFirstName(e.target.value)} />
+                    &lt;/Form.Group>
 
-            &lt;div methode='get' className='editNameBlock'>
-                &lt;Form.Group className="formLine" size="lg" controlId="firstName">
-                    &lt;Form.Label className="formLabel">Firstname&lt;/Form.Label>
-                    &lt;Form.Control autofocus type="text" placeholder={ userFirstName }
-                        onChange={(e) => setFirstName(e.target.value)} />
-                &lt;/Form.Group>
+                    &lt;Form.Group className="formLine" size="lg" controlId="lastName">
+                        &lt;Form.Control autofocus type="text" placeholder={ userLastName }
+                            onChange={(e) => setLastName(e.target.value)} />
+                    &lt;/Form.Group>
+                &lt;/div>
 
-                &lt;Form.Group className="formLine" size="lg" controlId="lastName">
-                    &lt;Form.Label className="formLabel">Lastname&lt;/Form.Label>
-                    &lt;Form.Control autofocus type="text" placeholder={ userLastName }
-                        onChange={(e) => setLastName(e.target.value)} />
-                &lt;/Form.Group>
-            &lt;/div>
+                &lt;div className='buttonsSection'>
+                    &lt;Button className="buttonSave" block="true" size="lg" type="submit" disabled={!validateFormName()}>
+                        Save
+                    &lt;/Button>
+                    &lt;CloseButton className="buttonOut" onClick={() => close()}>
+                        Cancel
+                    &lt;/CloseButton> 
+                &lt;/div>
+            &lt;/Form>     
+        &lt;/div>  
 
-            &lt;Button className="buttonSave" block="true" size="lg" type="submit" disabled={!validateFormName()}>
-                Submit
-            &lt;/Button>
-
-        &lt;/Form>        
+        : null 
+        }
+        &lt;/> 
     ) 
 }
 
@@ -148,13 +146,13 @@ export default EditNameForm</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html"><img src="../custom-template/assets/logo.png" ></a></h2><h3>Global</h3><ul><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#DashboardAccount">DashboardAccount</a></li><li><a href="global.html#DashboardHeader">DashboardHeader</a></li><li><a href="global.html#EditName">EditName</a></li><li><a href="global.html#EditNameForm">EditNameForm</a></li><li><a href="global.html#Error404">Error404</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Homepage">Homepage</a></li><li><a href="global.html#LOGIN_SUCCESFUL">LOGIN_SUCCESFUL</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SignInForm">SignInForm</a></li><li><a href="global.html#allReducers">allReducers</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loginReducer">loginReducer</a></li><li><a href="global.html#profile">profile</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#userReducer">userReducer</a></li></ul>
+    <h2><a href="index.html"><img src="../custom-template/assets/logo.png" ></a></h2><h3>Global</h3><ul><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#DashboardAccount">DashboardAccount</a></li><li><a href="global.html#DashboardHeader">DashboardHeader</a></li><li><a href="global.html#EditNameForm">EditNameForm</a></li><li><a href="global.html#Error404">Error404</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Homepage">Homepage</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SignInForm">SignInForm</a></li><li><a href="global.html#allReducers">allReducers</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loginReducer">loginReducer</a></li><li><a href="global.html#loginSuccesful">loginSuccesful</a></li><li><a href="global.html#profile">profile</a></li><li><a href="global.html#profileSuccesful">profileSuccesful</a></li><li><a href="global.html#signOut">signOut</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#updateSuccesful">updateSuccesful</a></li><li><a href="global.html#userReducer">userReducer</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Feb 21 2023 13:56:52 GMT+0100 (GMT+01:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Feb 21 2023 17:29:47 GMT+0100 (GMT+01:00)
 </footer>
 
 <script> prettyPrint(); </script>

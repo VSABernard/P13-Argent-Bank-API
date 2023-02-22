@@ -1,8 +1,3 @@
-/**
- * JavaScript objects that describe changes to the state.
- * @function
- */
-
 export const LOGIN_SUCCESFUL = 'loginSuccesful'
 export const LOGIN_FAILED = 'loginFailed'
 export const SIGN_OUT = 'signOut'
@@ -11,6 +6,10 @@ export const PROFILE_FAILED = 'profileFailed'
 export const UPDATE_SUCCESFUL = 'profileSuccesful'
 export const UPDATE_FAILED = 'profileFailed'
 
+/**
+ * JavaScript objects that describe changes to the state of login action.
+ * @function
+ */
 export const loginSuccesful = (token) => {
     return {
         type: LOGIN_SUCCESFUL,
@@ -25,12 +24,20 @@ export const loginFailed = (error) => {
     }
 }
 
+/**
+ * JavaScript objects that describe changes to the state of sign out action.
+ * @function
+ */
 export const signOut = () => {
     return {
         type: SIGN_OUT
     }
 }
 
+/**
+ * JavaScript objects that describe changes to the state of user's profile.
+ * @function
+ */
 export const profileSuccesful = (user) => {
     return {
         type: PROFILE_SUCCESFUL,
@@ -45,6 +52,10 @@ export const profileFailed = (error) => {
     }
 }
 
+/**
+ * JavaScript objects that describe changes to the state of update user's profile.
+ * @function
+ */
 export const updateSuccesful = (user) => {
     return {
         type: UPDATE_SUCCESFUL,

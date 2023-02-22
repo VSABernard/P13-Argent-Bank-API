@@ -3,9 +3,9 @@ import axios from 'axios'
 /**
  * Function which calls the API /user/login
  * If the email and the password are correct then as authotization token will be returned
- * @param { String } email user's email
- * @param { String } password user's password
- * @returns token
+ * @param { String } email User's email
+ * @param { String } password User's password
+ * @returns Token
  */
 
 export async function login(email, password) {
@@ -30,8 +30,8 @@ export async function login(email, password) {
 
 /**
  * Function which calls the API /user/profile
- * @param { String } token authorization token
- * @returns user's profile
+ * @param { String } token Authorization token
+ * @returns User's profile
  */
 export async function profile(token) {
     const body = {}
@@ -57,9 +57,10 @@ export async function profile(token) {
 
 /**
  * Function which update the API /user/profile
- * @param { String } token authorization token
- * @param 
- * @returns user's profile
+ * @param { String } token Authorization token
+ * @param { Object } firstName User's firtsname
+ * @param { Object } lastName User's lastname
+ * @returns User's profile
  */
 export async function update(token, firstName, lastName) {
     const body = {

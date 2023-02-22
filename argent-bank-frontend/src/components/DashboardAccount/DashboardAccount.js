@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import { NavLink } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 
 import { profileSuccesful, profileFailed } from '../../features/featuresUser/actions/Action'
@@ -14,20 +13,37 @@ import '../../components/DashboardAccount/DashboardAccount.css'
  */
 
 const DashboardAccount = () => {
+   
     /**
-     * Get the user's token from the state
+     * Store the token variable
      */
-    const token = useSelector(state => state.token)
-    
+    const [token, setToken] = useState([])  
+
+    /**
+     * When the component is mounted, it retrieve the token from the localStorage
+     */
+    useEffect(() => {
+        const tokenLocalStorage = JSON.parse(localStorage.getItem('token'))
+        
+        /**
+         * The token is updated in the state
+         */
+        if(tokenLocalStorage){
+            setToken(tokenLocalStorage)          
+        } 
+    },[])    
+       
     /**
      * The dispatch is used to send actions to the reducer
      */
     const dispatch = useDispatch()
 
     /**
-     * useEffect is used to retrieve the datas from the user's service in asynchronous mode
+     * useEffect is used to retrieve the datas from the user's service in asynchronous mode,
+     * when dispatch or token changes
      */
     useEffect(() => {
+        console.log('useEffect dispatch token')
         async function fetchData (){
             let userProfile = await profile (token)
             if( userProfile != null ) {
@@ -36,7 +52,9 @@ const DashboardAccount = () => {
                 dispatch(profileFailed("User not found"))
             }
         }
-        fetchData()
+        if(token.length > 0){
+            fetchData()
+        }        
     }, [dispatch, token]) 
 
     /**
@@ -44,6 +62,9 @@ const DashboardAccount = () => {
      */
     const user = useSelector(state => state.user)    
 
+    /**
+     * Create one state to open and close modal editNameForm
+     */
     const [modal, setModal] = useState(false)
     const Toggle = () => setModal(!modal)
 
@@ -55,8 +76,7 @@ const DashboardAccount = () => {
                         Edit Name
                 </button>
                 <EditNameForm show={ modal } close={ Toggle } />
-            </div>
-            
+            </div>            
 
             <h2 className="srOnly">Accounts</h2>
             <section className="account">

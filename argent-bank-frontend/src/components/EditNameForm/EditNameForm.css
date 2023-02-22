@@ -81,7 +81,7 @@ input {
     text-decoration: none;
 }
 
-.buttonSave:hover {
+.buttonSave:hover, .buttonOut:hover {
     cursor: pointer;
     text-decoration: underline;
 }

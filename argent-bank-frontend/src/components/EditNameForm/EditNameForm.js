@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { Form, Button, CloseButton } from 'react-bootstrap'
@@ -11,8 +11,8 @@ import '../EditNameForm/EditNameForm.css'
 /**
  * Component React which displays the edit form of the user's name
  * @component
- * @param {*} show open the editing modal
- * @param {*} close close the editing modal
+ * @param {*} show The modal will only be displayed when show state is true
+ * @param {*} close Close the editing modal
  */
 
 const EditNameForm = ({ show, close }) => {
@@ -22,13 +22,20 @@ const EditNameForm = ({ show, close }) => {
      */
      const user = useSelector(state => state.user)  
      const userFirstName = user.firstName
-     const userLastName = user.lastName
-
-     const token = useSelector(state => state.token)
-   
+     const userLastName = user.lastName     
    
     const [firstName, setFirstName] = useState(userFirstName)
     const [lastName, setLastName] = useState(userLastName)
+    const [token, setToken] = useState([])  
+
+    useEffect(() => {
+        const tokenLocalStorage = JSON.parse(localStorage.getItem('token'))
+        
+        if(tokenLocalStorage){
+            setToken(tokenLocalStorage)          
+        } 
+
+    },[]) 
 
     /**
      * The submit button is linked up with the state by using a validate function called validateForm.
@@ -53,6 +60,7 @@ const EditNameForm = ({ show, close }) => {
      * @param {*} event 
      */
     async function handleSubmitEditName(event) {
+        
         event.preventDefault()
 
         let formFirstName = event.target.querySelector('input#firstName.form-control').value
@@ -70,6 +78,8 @@ const EditNameForm = ({ show, close }) => {
         } else {
             dispatch(updateFailed("Error"))
         }
+
+        close()
     }
         
     return (
@@ -77,6 +87,8 @@ const EditNameForm = ({ show, close }) => {
             show ?
         
         <div className='modalEditName' onClick={() => close()}>
+            
+            {/* Whenever user clicks outside it should close the modal */}
             <Form className='editNameForm' onSubmit={handleSubmitEditName} onClick={(e) => e.stopPropagation()}>      
                 <div methode='get' className='editNameBlock'>
                     <Form.Group className="formLine" size="lg" controlId="firstName">
