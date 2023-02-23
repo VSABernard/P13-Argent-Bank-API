@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
 
 import '../TransactionHeader/TransactionHeader.css'
 
@@ -8,7 +7,7 @@ import '../TransactionHeader/TransactionHeader.css'
  * Component React displaying header for page transactions (containing account data)
  * @component
  */
-const TransactionHeader = () => {
+const TransactionHeader = ({accountId}) => {
 
   /**
      * Store the data's account variables
@@ -18,7 +17,6 @@ const TransactionHeader = () => {
   /**
      * Get the user account from the state
      */   
-    const { accountId } = useParams()
     const [account, setAccount] = useState(null)
   
     useEffect(() => {    

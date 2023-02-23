@@ -6,8 +6,14 @@ export async function accounts( token ) {
     return accounts
 }
 
-export async function transaction( token ) {
+export async function transaction( accountId ) {
     let transactions = []
-    transactions = userTransactionsData.body.accountData
-    return transactions
+    transactions = userTransactionsData.body.transactions
+
+    let transactionsByAccountId = transactions.filter(transaction => {
+           
+            return transaction.accountId === accountId}
+        )
+
+    return transactionsByAccountId
 }
