@@ -5,7 +5,7 @@
     padding-bottom: 50px;
 }
 
-.account {
+.accountcontent {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -20,7 +20,7 @@
     text-align: left;
 }
 
-.accountListe {
+.accountList {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -70,14 +70,22 @@
   
 .transactionButton {
     display: block;
+    height: 35px;
     width: 100%;
-    padding: 8px;
+    text-align: center;
     font-size: 1.1rem;
     font-weight: bold;
+    text-decoration: none;
     margin-top: 15%;
+    padding-top: 2%;
     border-color: #00bc77;
     background-color: #00bc77;
     color: #fff;
+}
+
+.transactionButton:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
   
 @media (min-width: 720px) {

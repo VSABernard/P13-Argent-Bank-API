@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import { useSelector, useDispatch } from "react-redux"
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { profileSuccesful, profileFailed } from '../../features/featuresUser/actions/Action'
+import { accountsSuccesful, accountsFailed } from '../../features/featuresTransaction/actions/Action'
 import { profile } from '../../services/userService'
 import { accounts } from '../../services/transactionService'
 import EditNameForm from '../EditNameForm/EditNameForm'
-import Account from '../../pages/Account/Account'
 
 import '../../components/DashboardAccount/DashboardAccount.css'
 
@@ -15,7 +15,7 @@ import '../../components/DashboardAccount/DashboardAccount.css'
  * @component
  */
 
-const DashboardAccount = ({accountData}) => {  
+const DashboardAccount = () => {  
    
     /**
      * Store the token variable
@@ -51,7 +51,6 @@ const DashboardAccount = ({accountData}) => {
      * also to retrieve the datas from the transaction service
      */
     useEffect(() => {
-        console.log('useEffect dispatch token')
         async function fetchUser (){
             let userProfile = await profile (token)
             if( userProfile != null ) {
@@ -63,6 +62,11 @@ const DashboardAccount = ({accountData}) => {
         async function fetchAccounts (){
             let userAccounts = await accounts (token)
             setAccountDatas(userAccounts)
+            if( userAccounts != null ) {
+                dispatch(accountsSuccesful(userAccounts))
+            } else {
+                dispatch(accountsFailed("User not found"))
+            }
         }
         if(token.length > 0){
             fetchUser()
@@ -81,8 +85,6 @@ const DashboardAccount = ({accountData}) => {
     const [modal, setModal] = useState(false)
     const Toggle = () => setModal(!modal)   
 
-    const navigate = useNavigate()
-
     return (
         <main className="mainAccount">
             <div className="header">
@@ -94,9 +96,9 @@ const DashboardAccount = ({accountData}) => {
             </div>            
 
             <h2 className="srOnly">Accounts</h2>
-            <section className="account">
+            <section className="accountcontent">
                 { accountDatas.map((accountData) => (
-                    <li key={accountData.accountId} className='accountListe'>
+                    <li key={accountData.accountId} className='accountList'>
                         <div className='info'>
                             <div className="accountContentWrapper">
                             <h3 className="accountTitle">{accountData.title}</h3>
@@ -105,9 +107,9 @@ const DashboardAccount = ({accountData}) => {
                             </div>
                         </div>
                         <div className="accountContentWrapper cta">
-                            <button className="transactionButton"  navTo={() => navigate({Account})}>
+                            <Link className="transactionButton" to={`/AccountPage/${accountData.accountId}`} >
                                 View transactions
-                            </button>
+                            </Link>
                         </div>
                     </li>
                 ))}
