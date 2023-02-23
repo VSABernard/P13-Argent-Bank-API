@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import { useSelector, useDispatch } from "react-redux"
+import { useNavigate } from 'react-router-dom'
 
 import { profileSuccesful, profileFailed } from '../../features/featuresUser/actions/Action'
-import { profile } from "../../services/userService"
+import { profile } from '../../services/userService'
+import { accounts } from '../../services/transactionService'
 import EditNameForm from '../EditNameForm/EditNameForm'
+import Account from '../../pages/Account/Account'
 
 import '../../components/DashboardAccount/DashboardAccount.css'
 
@@ -12,12 +15,17 @@ import '../../components/DashboardAccount/DashboardAccount.css'
  * @component
  */
 
-const DashboardAccount = () => {
+const DashboardAccount = ({accountData}) => {  
    
     /**
      * Store the token variable
      */
-    const [token, setToken] = useState([])  
+    const [token, setToken] = useState([])
+
+    /**
+     * Store the data's account variables
+     */
+    const [accountDatas, setAccountDatas] = useState([])
 
     /**
      * When the component is mounted, it retrieve the token from the localStorage
@@ -39,12 +47,12 @@ const DashboardAccount = () => {
     const dispatch = useDispatch()
 
     /**
-     * useEffect is used to retrieve the datas from the user's service in asynchronous mode,
-     * when dispatch or token changes
+     * useEffect is used to retrieve the datas from the user's service in asynchronous mode when dispatch or token changes
+     * also to retrieve the datas from the transaction service
      */
     useEffect(() => {
         console.log('useEffect dispatch token')
-        async function fetchData (){
+        async function fetchUser (){
             let userProfile = await profile (token)
             if( userProfile != null ) {
                 dispatch(profileSuccesful(userProfile))
@@ -52,8 +60,13 @@ const DashboardAccount = () => {
                 dispatch(profileFailed("User not found"))
             }
         }
+        async function fetchAccounts (){
+            let userAccounts = await accounts (token)
+            setAccountDatas(userAccounts)
+        }
         if(token.length > 0){
-            fetchData()
+            fetchUser()
+            fetchAccounts()
         }        
     }, [dispatch, token]) 
 
@@ -66,7 +79,9 @@ const DashboardAccount = () => {
      * Create one state to open and close modal editNameForm
      */
     const [modal, setModal] = useState(false)
-    const Toggle = () => setModal(!modal)
+    const Toggle = () => setModal(!modal)   
+
+    const navigate = useNavigate()
 
     return (
         <main className="mainAccount">
@@ -80,39 +95,22 @@ const DashboardAccount = () => {
 
             <h2 className="srOnly">Accounts</h2>
             <section className="account">
-                <div className="accountContentWrapper">
-                <h3 className="accountTitle">Argent Bank Checking (x8349)</h3>
-                <p className="accountAmount">$2,082.79</p>
-                <p className="accountAmountDescription">Available Balance</p>
-                </div>
-
-                <div className="accountContentWrapper cta">
-                <button className="transactionButton">View transactions</button>
-                </div>
-            </section>
-
-            <section className="account">
-                <div className="accountContentWrapper">
-                <h3 className="accountTitle">Argent Bank Savings (x6712)</h3>
-                <p className="accountAmount">$10,928.42</p>
-                <p className="accountAmountDescription">Available Balance</p>
-                </div>
-
-                <div className="accountContentWrapper cta">
-                <button className="transactionButton">View transactions</button>
-                </div>
-            </section>
-
-            <section className="account">
-                <div className="accountContentWrapper">
-                <h3 className="accountTitle">Argent Bank Credit Card (x8349)</h3>
-                <p className="accountAmount">$184.30</p>
-                <p className="accountAmountDescription">Current Balance</p>
-                </div>
-
-                <div className="accountContentWrapper cta">
-                <button className="transactionButton">View transactions</button>
-                </div>
+                { accountDatas.map((accountData) => (
+                    <li key={accountData.accountId} className='accountListe'>
+                        <div className='info'>
+                            <div className="accountContentWrapper">
+                            <h3 className="accountTitle">{accountData.title}</h3>
+                            <p className="accountAmount">{accountData.amount}</p>
+                            <p className="accountAmountDescription">{accountData.description}</p>
+                            </div>
+                        </div>
+                        <div className="accountContentWrapper cta">
+                            <button className="transactionButton"  navTo={() => navigate({Account})}>
+                                View transactions
+                            </button>
+                        </div>
+                    </li>
+                ))}
             </section>
         </main>
     )
