@@ -1,0 +1,77 @@
+.accordion {
+    display: flex;
+    flex-direction: column;
+    border: 1 px solid white;
+    margin-top: 10px;
+    height: auto;
+}
+
+.accordion:hover {
+    color: #42b983;
+}
+
+.accordionHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+}
+
+.accordionTitle {
+    display: flex;
+    flex-direction: row;    
+    justify-content: space-around;
+    list-style-type: none;
+    padding: 10px;
+    border: 1px solid #12002b;
+    background-color: #fff;
+    gap: 30px;
+    width: 100%;
+    height: 40px;
+}
+
+.accordionTitle p{
+    margin: auto;
+    padding: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.chevronUp, .chevronDown {
+    height: 20px;
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+
+.accordionBody {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: white;
+    margin-top: -10px;
+    padding: 10px;
+    width: auto;
+}
+
+.accordionList {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    list-style-type: none;
+    padding: 0;
+    gap: 10px;
+}
+
+.category, .note {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.category p, .note p {
+    margin: 0;
+}

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { transaction } from '../../services/transactionService'
+import { profile } from '../../services/userService'
 import { transactionsSuccesful, transactionsFailed } from '../../features/featuresTransaction/actions/Action'
+import { profileSuccesful, profileFailed } from '../../features/featuresUser/actions/Action'
 
-import { FaChevronDown } from "react-icons/fa"
-import { FaChevronUp } from "react-icons/fa"
+import Accordion from "../Accordion/Accordion"
 import '../TransactionDashboard/TransactionDashboard.css'
 
 /**
@@ -19,11 +20,38 @@ const TransactionDashboard = ({accountId}) => {
     const [transactionDatas, setTransactionDatas] = useState([])
 
     /**
+     * Store the token variable
+     */
+    const [token, setToken] = useState([])
+
+    /**
+     * When the component is mounted, it retrieve the token from the localStorage
+     */
+    useEffect(() => {
+        const tokenLocalStorage = JSON.parse(localStorage.getItem('token'))
+        
+        /**
+         * The token is updated in the state
+         */
+        if(tokenLocalStorage){
+            setToken(tokenLocalStorage)          
+        } 
+    },[])    
+
+    /**
      * The dispatch is used to send actions to the reducer
      */
     const dispatch = useDispatch()
 
     useEffect(() => {
+        async function fetchUser (){
+            let userProfile = await profile (token)
+            if( userProfile != null ) {
+                dispatch(profileSuccesful(userProfile))
+            } else {
+                dispatch(profileFailed("User not found"))
+            }
+        }
         async function fetchTransactions (){
             let userTransactions = await transaction(accountId)
             setTransactionDatas(userTransactions)
@@ -34,9 +62,9 @@ const TransactionDashboard = ({accountId}) => {
             }
         }
         fetchTransactions()
-    }, [accountId, dispatch]) 
+        fetchUser()
+    }, [accountId, dispatch, token]) 
 
-    const [isActive, setIsActive] = useState(false)
     return (    
         <div className="transactionDashboard">
             <div className="titleTransactionList">
@@ -47,18 +75,8 @@ const TransactionDashboard = ({accountId}) => {
                 <p className="titleBalance">BALANCE</p>
             </div>
             <div className="transactionInfos">
-                { transactionDatas.map((transactions) => (
-                    <li key={transactions.transactionId} className='transactionList'>
-                        <div className="chevronSection" onClick={() => setIsActive(!isActive)}>
-                            <FaChevronDown className='chevrons' icon={`${isActive  ? 'chevron-up' : 'chevron-down'}`} />
-                        </div>
-                        <div className='list'>
-                            <p className="transactionDate">{transactions.createdAt}</p>
-                            <p className="transactionDescription">{transactions.description}</p>
-                            <p className="transactionAmount">${transactions.amount}</p>
-                            <p className="transactionBalance">${transactions.balance}</p>
-                        </div>
-                    </li>
+                { transactionDatas.map((transaction) => (
+                    <Accordion key={transaction.transactionId}  transaction={transaction}/>
                 ))}
             </div>
         </div>
