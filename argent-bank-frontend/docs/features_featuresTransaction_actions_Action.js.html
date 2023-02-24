@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/userService.js</title>
+    <title>JSDoc: Source: features/featuresTransaction/actions/Action.js</title>
     <link rel="icon" href="../custom-template/assets/favicon.png" />  
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -26,99 +26,46 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import axios from 'axios'
+            <pre class="prettyprint source linenums"><code>export const ACCOUNTS_SUCCESFUL = 'accountsSuccesful'
+export const ACCOUNTS_FAILED = 'accountsFailed'
+export const TRANSACTIONS_SUCCESFUL = 'transactionsSuccesful'
+export const TRANSACTIONS_FAILED = 'transactionsFailed'
 
 /**
- * Function which calls the API /user/login
- * If the email and the password are correct then as authotization token will be returned
- * @param { String } email User's email
- * @param { String } password User's password
- * @returns Token
+ * JavaScript objects that describe changes to the state of account's action.
+ * @function
  */
-
-export async function login(email, password) {
-    const parameters = {
-    email: email,
-    password: password
+export const accountsSuccesful = (accounts) => {
+    return {
+        type: ACCOUNTS_SUCCESFUL,
+        payload: accounts
     }
+}
 
-    const url = 'http://localhost:3001/api/v1/user/login'
-    let token = null
-
-    await axios.post (url, parameters)
-        .then(response => {
-            token = response.data.body.token
-        })
-        .catch (error => {
-            console.log(error)
-        })    
-    return token    
-}       
-
-/**
- * Function which calls the API /user/profile
- * @param { String } token Authorization token
- * @returns User's profile
- */
-export async function profile({token}) {
-
-    let user = null
-
-    if(token != null){
-        const body = {}
-        const config = { 
-            headers: { Authorization: `Bearer ${token}`}
-        }
-        const url = 'http://localhost:3001/api/v1/user/profile'
-
-        
-        
-        await axios.post (url, body, config)
-            .then(response => {            
-                user = {
-                    firstName : response.data.body.firstName,
-                    lastName : response.data.body.lastName,
-                    email : response.data.body.email,
-                }
-            })
-            .catch (error => {
-                console.log(error)
-            })
+export const accountsFailed = (error) => {
+    return {
+        type : ACCOUNTS_FAILED,
+        payload : error
     }
-    return user
 }
 
 /**
- * Function which update the API /user/profile
- * @param { String } token Authorization token
- * @param { Object } firstName User's firtsname
- * @param { Object } lastName User's lastname
- * @returns User's profile
+ * JavaScript objects that describe changes to the state of transaction's action.
+ * @function
  */
-export async function update(token, firstName, lastName) {
-    const body = {
-        firstName: firstName,
-        lastName: lastName
+export const transactionsSuccesful = (accounts) => {
+    return {
+        type: TRANSACTIONS_SUCCESFUL,
+        payload: accounts
     }
-    const config = { 
-        headers: { Authorization: `Bearer ${token}`}
-    }
-    const url = 'http://localhost:3001/api/v1/user/profile'
-
-    let user = null
-    await axios.put (url, body, config)
-        .then(response => {            
-            user = {
-                firstName : response.data.body.firstName,
-                lastName : response.data.body.lastName,
-            }
-        })
-        .catch (error => {
-            console.log(error)
-        })
-    return user
 }
-</code></pre>
+
+export const transactionsFailed = (error) => {
+    return {
+        type : TRANSACTIONS_FAILED,
+        payload : error
+    }
+}</code></pre>
         </article>
     </section>
 

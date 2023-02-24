@@ -26,7 +26,7 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React, { useState } from 'react'
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { Form, Button, CloseButton } from 'react-bootstrap'
@@ -50,12 +50,20 @@ const EditNameForm = ({ show, close }) => {
      */
      const user = useSelector(state => state.user)  
      const userFirstName = user.firstName
-     const userLastName = user.lastName
-
-     const token = useSelector(state => state.token)   
+     const userLastName = user.lastName     
    
     const [firstName, setFirstName] = useState(userFirstName)
     const [lastName, setLastName] = useState(userLastName)
+    const [token, setToken] = useState([])  
+
+    useEffect(() => {
+        const tokenLocalStorage = JSON.parse(localStorage.getItem('token'))
+        
+        if(tokenLocalStorage){
+            setToken(tokenLocalStorage)          
+        } 
+
+    },[]) 
 
     /**
      * The submit button is linked up with the state by using a validate function called validateForm.
@@ -80,6 +88,7 @@ const EditNameForm = ({ show, close }) => {
      * @param {*} event 
      */
     async function handleSubmitEditName(event) {
+        
         event.preventDefault()
 
         let formFirstName = event.target.querySelector('input#firstName.form-control').value
@@ -97,6 +106,8 @@ const EditNameForm = ({ show, close }) => {
         } else {
             dispatch(updateFailed("Error"))
         }
+
+        close()
     }
         
     return (
@@ -108,12 +119,12 @@ const EditNameForm = ({ show, close }) => {
             {/* Whenever user clicks outside it should close the modal */}
             &lt;Form className='editNameForm' onSubmit={handleSubmitEditName} onClick={(e) => e.stopPropagation()}>      
                 &lt;div methode='get' className='editNameBlock'>
-                    &lt;Form.Group className="formLine" size="lg" controlId="firstName">
+                    &lt;Form.Group className="formLineEdit" size="lg" controlId="firstName">
                         &lt;Form.Control autofocus type="text" placeholder={ userFirstName }
                             onChange={(e) => setFirstName(e.target.value)} />
                     &lt;/Form.Group>
 
-                    &lt;Form.Group className="formLine" size="lg" controlId="lastName">
+                    &lt;Form.Group className="formLineEdit" size="lg" controlId="lastName">
                         &lt;Form.Control autofocus type="text" placeholder={ userLastName }
                             onChange={(e) => setLastName(e.target.value)} />
                     &lt;/Form.Group>
@@ -146,13 +157,13 @@ export default EditNameForm</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html"><img src="../custom-template/assets/logo.png" ></a></h2><h3>Global</h3><ul><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#DashboardAccount">DashboardAccount</a></li><li><a href="global.html#DashboardHeader">DashboardHeader</a></li><li><a href="global.html#EditNameForm">EditNameForm</a></li><li><a href="global.html#Error404">Error404</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Homepage">Homepage</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SignInForm">SignInForm</a></li><li><a href="global.html#allReducers">allReducers</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loginReducer">loginReducer</a></li><li><a href="global.html#loginSuccesful">loginSuccesful</a></li><li><a href="global.html#profile">profile</a></li><li><a href="global.html#profileSuccesful">profileSuccesful</a></li><li><a href="global.html#signOut">signOut</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#updateSuccesful">updateSuccesful</a></li><li><a href="global.html#userReducer">userReducer</a></li></ul>
+    <h2><a href="index.html"><img src="../custom-template/assets/logo.png" ></a></h2><h3>Global</h3><ul><li><a href="global.html#AccountPage">AccountPage</a></li><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#DashboardAccount">DashboardAccount</a></li><li><a href="global.html#DashboardHeader">DashboardHeader</a></li><li><a href="global.html#EditNameForm">EditNameForm</a></li><li><a href="global.html#Error404">Error404</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Homepage">Homepage</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SignInForm">SignInForm</a></li><li><a href="global.html#TransactionDashboard">TransactionDashboard</a></li><li><a href="global.html#TransactionHeader">TransactionHeader</a></li><li><a href="global.html#accountsReducer">accountsReducer</a></li><li><a href="global.html#accountsSuccesful">accountsSuccesful</a></li><li><a href="global.html#allReducers">allReducers</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loginReducer">loginReducer</a></li><li><a href="global.html#loginSuccesful">loginSuccesful</a></li><li><a href="global.html#profile">profile</a></li><li><a href="global.html#profileSuccesful">profileSuccesful</a></li><li><a href="global.html#signOut">signOut</a></li><li><a href="global.html#transactionsSuccesful">transactionsSuccesful</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#updateSuccesful">updateSuccesful</a></li><li><a href="global.html#userReducer">userReducer</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Feb 21 2023 17:29:47 GMT+0100 (GMT+01:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Fri Feb 24 2023 22:45:18 GMT+0100 (GMT+01:00)
 </footer>
 
 <script> prettyPrint(); </script>

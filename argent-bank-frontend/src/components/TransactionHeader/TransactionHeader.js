@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react"
-import { useSelector } from "react-redux"
+import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { accounts } from '../../services/transactionService'
+
 import '../TransactionHeader/TransactionHeader.css'
 
 /**
@@ -13,7 +14,6 @@ const TransactionHeader = ({accountId}) => {
      * Store the data's account variables
      */
     let accountsStore = useSelector(state => state.accounts)
-
 
     /**
      * Store the token variable
@@ -33,7 +33,7 @@ const TransactionHeader = ({accountId}) => {
       if(tokenLocalStorage){
           setToken(tokenLocalStorage)          
       } 
-  },[])   
+    },[])   
 
    /**
      * useEffect is used to retrieve the datas from the user's service in asynchronous mode when dispatch or token changes
@@ -45,9 +45,14 @@ const TransactionHeader = ({accountId}) => {
         let result = await accounts (token)       
         setAccountsData(result)
     }
-    if(token.length > 0 && accountsStore == null){
+
+    if( accountsStore == null ){
+      if(token.length > 0){
         fetchAccounts()
-    }        
+      }
+    } else {
+      setAccountsData(accountsStore)
+    } 
 }, [accountsData, accountsStore, token]) 
 
   /**

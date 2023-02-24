@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/userService.js</title>
+    <title>JSDoc: Source: components/TransactionHeader/TransactionHeader.js</title>
     <link rel="icon" href="../custom-template/assets/favicon.png" />  
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -26,99 +26,94 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import axios from 'axios'
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { accounts } from '../../services/transactionService'
+
+import '../TransactionHeader/TransactionHeader.css'
 
 /**
- * Function which calls the API /user/login
- * If the email and the password are correct then as authotization token will be returned
- * @param { String } email User's email
- * @param { String } password User's password
- * @returns Token
+ * Component React displaying header for page transactions (containing account data)
+ * @component
  */
+const TransactionHeader = ({accountId}) => {
 
-export async function login(email, password) {
-    const parameters = {
-    email: email,
-    password: password
+  /**
+     * Store the data's account variables
+     */
+    let accountsStore = useSelector(state => state.accounts)
+
+    /**
+     * Store the token variable
+     */
+    const [token, setToken] = useState([])
+    const [accountsData, setAccountsData] = useState([])
+
+    /**
+     * When the component is mounted, it retrieve the token from the localStorage
+     */
+    useEffect(() => {
+      const tokenLocalStorage = JSON.parse(localStorage.getItem('token'))
+      
+      /**
+       * The token is updated in the state
+       */
+      if(tokenLocalStorage){
+          setToken(tokenLocalStorage)          
+      } 
+    },[])   
+
+   /**
+     * useEffect is used to retrieve the datas from the user's service in asynchronous mode when dispatch or token changes
+     * also to retrieve the datas from the transaction service
+     */
+   useEffect(() => {
+    
+    async function fetchAccounts (){
+        let result = await accounts (token)       
+        setAccountsData(result)
     }
 
-    const url = 'http://localhost:3001/api/v1/user/login'
-    let token = null
+    if( accountsStore == null ){
+      if(token.length > 0){
+        fetchAccounts()
+      }
+    } else {
+      setAccountsData(accountsStore)
+    } 
+}, [accountsData, accountsStore, token]) 
 
-    await axios.post (url, parameters)
-        .then(response => {
-            token = response.data.body.token
-        })
-        .catch (error => {
-            console.log(error)
-        })    
-    return token    
-}       
-
-/**
- * Function which calls the API /user/profile
- * @param { String } token Authorization token
- * @returns User's profile
- */
-export async function profile({token}) {
-
-    let user = null
-
-    if(token != null){
-        const body = {}
-        const config = { 
-            headers: { Authorization: `Bearer ${token}`}
-        }
-        const url = 'http://localhost:3001/api/v1/user/profile'
-
+  /**
+     * Get the user account from the state
+     */   
+    const [account, setAccount] = useState(null)
+  
+    useEffect(() => {    
+        if(accountsData != null &amp;&amp; accountsData.length > 0 ){
+          let result = accountsData.filter(account => {
+            return account.accountId === accountId
+          }) 
         
-        
-        await axios.post (url, body, config)
-            .then(response => {            
-                user = {
-                    firstName : response.data.body.firstName,
-                    lastName : response.data.body.lastName,
-                    email : response.data.body.email,
-                }
-            })
-            .catch (error => {
-                console.log(error)
-            })
-    }
-    return user
+        setAccount(result[0])
+        }        
+    }, [accountId, accountsData]) 
+
+
+  if(account != null ){
+  return (     
+    &lt;div className="transactionHeader">
+      &lt;div className='transactionInfo'>
+          &lt;div className="transactionContentWrapper">
+            &lt;p className="transactionTitle">{account.title}&lt;/p>
+            &lt;p className="transactionAmount">{account.amount}&lt;/p>
+            &lt;p className="transactionAmountDescription">{account.description}&lt;/p>
+        &lt;/div>
+      &lt;/div>
+    &lt;/div>
+  )}
 }
 
-/**
- * Function which update the API /user/profile
- * @param { String } token Authorization token
- * @param { Object } firstName User's firtsname
- * @param { Object } lastName User's lastname
- * @returns User's profile
- */
-export async function update(token, firstName, lastName) {
-    const body = {
-        firstName: firstName,
-        lastName: lastName
-    }
-    const config = { 
-        headers: { Authorization: `Bearer ${token}`}
-    }
-    const url = 'http://localhost:3001/api/v1/user/profile'
-
-    let user = null
-    await axios.put (url, body, config)
-        .then(response => {            
-            user = {
-                firstName : response.data.body.firstName,
-                lastName : response.data.body.lastName,
-            }
-        })
-        .catch (error => {
-            console.log(error)
-        })
-    return user
-}
-</code></pre>
+export default TransactionHeader</code></pre>
         </article>
     </section>
 

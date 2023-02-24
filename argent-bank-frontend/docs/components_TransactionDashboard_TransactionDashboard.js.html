@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/DashboardAccount/DashboardAccount.js</title>
+    <title>JSDoc: Source: components/TransactionDashboard/TransactionDashboard.js</title>
     <link rel="icon" href="../custom-template/assets/favicon.png" />  
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -26,34 +26,31 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React, {useEffect, useState} from 'react'
-import { useSelector, useDispatch } from "react-redux"
-import { Link } from 'react-router-dom'
-
-import { profileSuccesful, profileFailed } from '../../features/featuresUser/actions/Action'
-import { accountsSuccesful, accountsFailed } from '../../features/featuresTransaction/actions/Action'
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { transaction } from '../../services/transactionService'
 import { profile } from '../../services/userService'
-import { accounts } from '../../services/transactionService'
-import EditNameForm from '../EditNameForm/EditNameForm'
+import { transactionsSuccesful, transactionsFailed } from '../../features/featuresTransaction/actions/Action'
+import { profileSuccesful, profileFailed } from '../../features/featuresUser/actions/Action'
 
-import '../../components/DashboardAccount/DashboardAccount.css'
+import Accordion from "../Accordion/Accordion"
+import '../TransactionDashboard/TransactionDashboard.css'
 
 /**
- * Component React which display the account's information of an user
+ * Component React displaying header for page transactions (containing account data)
  * @component
  */
+const TransactionDashboard = ({accountId}) => {
 
-const DashboardAccount = () => {  
-   
+    /**
+     * Store the data's transaction variables
+     */
+    const [transactionDatas, setTransactionDatas] = useState([])
+
     /**
      * Store the token variable
      */
     const [token, setToken] = useState([])
-
-    /**
-     * Store the data's account variables
-     */
-    const [accountDatas, setAccountDatas] = useState([])
 
     /**
      * When the component is mounted, it retrieve the token from the localStorage
@@ -68,16 +65,12 @@ const DashboardAccount = () => {
             setToken(tokenLocalStorage)          
         } 
     },[])    
-       
+
     /**
      * The dispatch is used to send actions to the reducer
      */
     const dispatch = useDispatch()
 
-    /**
-     * useEffect is used to retrieve the datas from the user's service in asynchronous mode when dispatch or token changes
-     * also to retrieve the datas from the transaction service
-     */
     useEffect(() => {
         async function fetchUser (){
             let userProfile = await profile (token)
@@ -87,66 +80,38 @@ const DashboardAccount = () => {
                 dispatch(profileFailed("User not found"))
             }
         }
-        async function fetchAccounts (){
-            let userAccounts = await accounts (token)
-            setAccountDatas(userAccounts)
-            if( userAccounts != null ) {
-                dispatch(accountsSuccesful(userAccounts))
+        async function fetchTransactions (){
+            let userTransactions = await transaction(accountId)
+            setTransactionDatas(userTransactions)
+            if( userTransactions != null ) {
+                dispatch(transactionsSuccesful(userTransactions))
             } else {
-                dispatch(accountsFailed("User not found"))
+                dispatch(transactionsFailed("User not found"))
             }
         }
-        if(token.length > 0){
-            fetchUser()
-            fetchAccounts()
-        }        
-    }, [dispatch, token]) 
+        fetchTransactions()
+        fetchUser()
+    }, [accountId, dispatch, token]) 
 
-    /**
-     * Get the user profile from the state
-     */
-    const user = useSelector(state => state.user)    
-
-    /**
-     * Create one state to open and close modal editNameForm
-     */
-    const [modal, setModal] = useState(false)
-    const Toggle = () => setModal(!modal)   
-
-    return (
-        &lt;main className="mainAccount">
-            &lt;div className="header">
-                &lt;h1>Welcome back&lt;br />{ user.firstName } { user.lastName } !&lt;/h1>
-                &lt;button className="editButton" onClick={() => Toggle()}>
-                        Edit Name
-                &lt;/button>
-                &lt;EditNameForm show={ modal } close={ Toggle } />
-            &lt;/div>            
-
-            &lt;h2 className="srOnly">Accounts&lt;/h2>
-            &lt;section className="accountcontent">
-                { accountDatas.map((accountData) => (
-                    &lt;li key={accountData.accountId} className='accountList'>
-                        &lt;div className='info'>
-                            &lt;div className="accountContentWrapper">
-                            &lt;h3 className="accountTitle">{accountData.title}&lt;/h3>
-                            &lt;p className="accountAmount">{accountData.amount}&lt;/p>
-                            &lt;p className="accountAmountDescription">{accountData.description}&lt;/p>
-                            &lt;/div>
-                        &lt;/div>
-                        &lt;div className="accountContentWrapper cta">
-                            &lt;Link className="transactionButton" to={`/AccountPage/${accountData.accountId}`} >
-                                View transactions
-                            &lt;/Link>
-                        &lt;/div>
-                    &lt;/li>
+    return (    
+        &lt;div className="transactionDashboard">
+            &lt;div className="titleTransactionList">
+                &lt;p className="vide">&lt;/p>
+                &lt;p className="titleDate">DATE&lt;/p>
+                &lt;p className="titleDescription">DESCRIPTION&lt;/p>
+                &lt;p className="titleAmount">AMOUNT&lt;/p>
+                &lt;p className="titleBalance">BALANCE&lt;/p>
+            &lt;/div>
+            &lt;div className="transactionInfos">
+                { transactionDatas.map((transaction) => (
+                    &lt;Accordion key={transaction.transactionId}  transaction={transaction}/>
                 ))}
-            &lt;/section>
-        &lt;/main>
-    )
+            &lt;/div>
+        &lt;/div>
+  )
 }
 
-export default DashboardAccount</code></pre>
+export default TransactionDashboard</code></pre>
         </article>
     </section>
 

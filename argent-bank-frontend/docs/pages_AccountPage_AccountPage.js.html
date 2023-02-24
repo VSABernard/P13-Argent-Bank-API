@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/userService.js</title>
+    <title>JSDoc: Source: pages/AccountPage/AccountPage.js</title>
     <link rel="icon" href="../custom-template/assets/favicon.png" />  
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -26,99 +26,38 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import axios from 'axios'
+            <pre class="prettyprint source linenums"><code>import React from 'react'
+import { useParams } from "react-router-dom"
+
+import DashboardHeader from '../../components/DashboardHeader/DashboardHeader'
+import TransactionHeader from '../../components/TransactionHeader/TransactionHeader'
+import TransactionDashboard from '../../components/TransactionDashboard/TransactionDashboard'
+import Footer from '../../components/Footer/Footer'
+
+import '../AccountPage/AccountPage.css'
 
 /**
- * Function which calls the API /user/login
- * If the email and the password are correct then as authotization token will be returned
- * @param { String } email User's email
- * @param { String } password User's password
- * @returns Token
+ * Component React which displays the account's info of the user
+ * @component
  */
 
-export async function login(email, password) {
-    const parameters = {
-    email: email,
-    password: password
-    }
+const AccountPage = () => {
 
-    const url = 'http://localhost:3001/api/v1/user/login'
-    let token = null
+    const { accountId } = useParams()
 
-    await axios.post (url, parameters)
-        .then(response => {
-            token = response.data.body.token
-        })
-        .catch (error => {
-            console.log(error)
-        })    
-    return token    
-}       
-
-/**
- * Function which calls the API /user/profile
- * @param { String } token Authorization token
- * @returns User's profile
- */
-export async function profile({token}) {
-
-    let user = null
-
-    if(token != null){
-        const body = {}
-        const config = { 
-            headers: { Authorization: `Bearer ${token}`}
-        }
-        const url = 'http://localhost:3001/api/v1/user/profile'
-
-        
-        
-        await axios.post (url, body, config)
-            .then(response => {            
-                user = {
-                    firstName : response.data.body.firstName,
-                    lastName : response.data.body.lastName,
-                    email : response.data.body.email,
-                }
-            })
-            .catch (error => {
-                console.log(error)
-            })
-    }
-    return user
+    return (
+        &lt;div className='accountPageSection'>
+            &lt;DashboardHeader />
+            &lt;div className='accountInfos'>
+                &lt;TransactionHeader accountId={accountId} />
+                &lt;TransactionDashboard accountId={accountId} />
+            &lt;/div> 
+            &lt;Footer />
+        &lt;/div>
+    )    
 }
 
-/**
- * Function which update the API /user/profile
- * @param { String } token Authorization token
- * @param { Object } firstName User's firtsname
- * @param { Object } lastName User's lastname
- * @returns User's profile
- */
-export async function update(token, firstName, lastName) {
-    const body = {
-        firstName: firstName,
-        lastName: lastName
-    }
-    const config = { 
-        headers: { Authorization: `Bearer ${token}`}
-    }
-    const url = 'http://localhost:3001/api/v1/user/profile'
-
-    let user = null
-    await axios.put (url, body, config)
-        .then(response => {            
-            user = {
-                firstName : response.data.body.firstName,
-                lastName : response.data.body.lastName,
-            }
-        })
-        .catch (error => {
-            console.log(error)
-        })
-    return user
-}
-</code></pre>
+export default AccountPage</code></pre>
         </article>
     </section>
 

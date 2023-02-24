@@ -52,7 +52,7 @@ function SignInForm () {
      * The autoFocus flag is setted for our fields, so that when the form loads, it sets focus to this field.
      */
     const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [password, setPassword] = useState("")     
 
     /**
      * The hook that comes with React Router that will allow us to use the browser’s History API.
@@ -84,10 +84,15 @@ function SignInForm () {
                 
         let token = await login( email, password )
         
+        /**
+         * The token is saved in localStorage when the sign in is succesful
+         */
         if ( token != null ) {
             dispatch(loginSuccesful(token))
+            localStorage.setItem('token',JSON.stringify(token))
             nav('/Dashboard')
         } else {
+            localStorage.setItem('token',JSON.stringify(""))
             dispatch(loginFailed("Token error"))
         }
     }
@@ -95,19 +100,19 @@ function SignInForm () {
     return (
         &lt;div className="signInContent">
             &lt;Form onSubmit={handleSubmit}>
-                &lt;FaUserCircle className="userIcon" />
+                &lt;FaUserCircle className="userIconSignIn" />
                 &lt;h1 className="signInTitle">Sign In&lt;/h1>
 
-                &lt;div className="formGroup">
-                    &lt;Form.Group className="formLine" size="lg" controlId="email">
-                        &lt;Form.Label className="formLabel">Username&lt;/Form.Label>
-                        &lt;Form.Control autofocus type="email" value={email}
+                &lt;div className="formGroupSignIn">
+                    &lt;Form.Group className="formLineSignIn" size="lg" controlId="email">
+                        &lt;Form.Label className="formLabelSignIn">Username&lt;/Form.Label>
+                        &lt;Form.Control className="formControlSignIn" autofocus type="email" value={email}
                             onChange={(e) => setEmail(e.target.value)} />                            
                     &lt;/Form.Group>
 
-                    &lt;Form.Group className="formLine" size="lg" controlId="password">
-                        &lt;Form.Label className="formLabel">Password&lt;/Form.Label>
-                        &lt;Form.Control autofocus type="password" value={password}
+                    &lt;Form.Group className="formLineSignIn" size="lg" controlId="password">
+                        &lt;Form.Label className="formLabelSignIn">Password&lt;/Form.Label>
+                        &lt;Form.Control className="formControlSignIn" autofocus type="password" value={password}
                             onChange={(e) => setPassword(e.target.value)} />
                     &lt;/Form.Group>
 
@@ -136,13 +141,13 @@ export default SignInForm</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html"><img src="../custom-template/assets/logo.png" ></a></h2><h3>Global</h3><ul><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#DashboardAccount">DashboardAccount</a></li><li><a href="global.html#DashboardHeader">DashboardHeader</a></li><li><a href="global.html#EditNameForm">EditNameForm</a></li><li><a href="global.html#Error404">Error404</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Homepage">Homepage</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SignInForm">SignInForm</a></li><li><a href="global.html#allReducers">allReducers</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loginReducer">loginReducer</a></li><li><a href="global.html#loginSuccesful">loginSuccesful</a></li><li><a href="global.html#profile">profile</a></li><li><a href="global.html#profileSuccesful">profileSuccesful</a></li><li><a href="global.html#signOut">signOut</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#updateSuccesful">updateSuccesful</a></li><li><a href="global.html#userReducer">userReducer</a></li></ul>
+    <h2><a href="index.html"><img src="../custom-template/assets/logo.png" ></a></h2><h3>Global</h3><ul><li><a href="global.html#AccountPage">AccountPage</a></li><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#DashboardAccount">DashboardAccount</a></li><li><a href="global.html#DashboardHeader">DashboardHeader</a></li><li><a href="global.html#EditNameForm">EditNameForm</a></li><li><a href="global.html#Error404">Error404</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Homepage">Homepage</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SignInForm">SignInForm</a></li><li><a href="global.html#TransactionDashboard">TransactionDashboard</a></li><li><a href="global.html#TransactionHeader">TransactionHeader</a></li><li><a href="global.html#accountsReducer">accountsReducer</a></li><li><a href="global.html#accountsSuccesful">accountsSuccesful</a></li><li><a href="global.html#allReducers">allReducers</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loginReducer">loginReducer</a></li><li><a href="global.html#loginSuccesful">loginSuccesful</a></li><li><a href="global.html#profile">profile</a></li><li><a href="global.html#profileSuccesful">profileSuccesful</a></li><li><a href="global.html#signOut">signOut</a></li><li><a href="global.html#transactionsSuccesful">transactionsSuccesful</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#updateSuccesful">updateSuccesful</a></li><li><a href="global.html#userReducer">userReducer</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Feb 21 2023 17:29:47 GMT+0100 (GMT+01:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Fri Feb 24 2023 22:45:18 GMT+0100 (GMT+01:00)
 </footer>
 
 <script> prettyPrint(); </script>

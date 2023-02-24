@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: data/TransactionDatas.js</title>
+    <link rel="icon" href="../custom-template/assets/favicon.png" />  
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <p><img src="../custom-template/assets/logo.png" ></p>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Javascript file containing mock data for acount and transactions.
+ * @file
+ */
+
+export const userAccountData = {
+    status: 200,
+    message: "Successfully got user account data",
+    body: {
+      accountData: [
+        {
+          title: "Argent Bank Checking (x8349)",
+          amount: "$2,082.79",
+          description: "Available Balance",
+          accountId: "checking",
+        },
+        {
+          title: "Argent Bank Savings (x6712)",
+          amount: "$10,928.42",
+          description: "Available Balance",
+          accountId: "savings",
+        },
+        {
+          title: "Argent Bank Credit Card (x8349)",
+          amount: "$184.30",
+          description: "Current Balance",
+          accountId: "credit-card",
+        },
+      ],
+    },
+  }
+
+  export const userTransactionsData = {
+    status: 200,
+    message: "Successfully got account transactions data",
+    body: {
+      transactions: [
+        {
+          createdAt: "June 20th, 2020",
+          description: "Golden Sun Bakery",
+          amount: "5.00",
+          balance: "2082.79",
+          type: "Electronic",
+          category: "Sport",
+          notes: "",
+          transactionId: "checking1",
+          updatedAt: "",
+          accountId: "checking",
+        },
+        {
+          createdAt: "June 20th, 2020",
+          description: "Golden Sun Bakery",
+          amount: "10.00",
+          balance: "2087.79",
+          type: "Electronic",
+          category: "Furnitures",
+          notes: "Waiting for refund",
+          transactionId: "checking2",
+          updatedAt: "",
+          accountId: "checking",
+        },
+        {
+          createdAt: "June 20th, 2020",
+          description: "Golden Sun Bakery",
+          amount: "20.00",
+          balance: "2097.79",
+          type: "Electronic",
+          category: "Food",
+          notes: "",
+          transactionId: "checking3",
+          updatedAt: "",
+          accountId: "checking",
+        },
+        {
+          createdAt: "June 20th, 2020",
+          description: "Golden Sun Bakery",
+          amount: "30.00",
+          balance: "2117.79",
+          type: "Electronic",
+          category: "Clothes",
+          notes: "",
+          transactionId: "checking4",
+          updatedAt: "",
+          accountId: "checking",
+        },
+        {
+          createdAt: "June 20th, 2020",
+          description: "Golden Sun Bakery",
+          amount: "40.00",
+          balance: "2147.79",
+          type: "Electronic",
+          category: "Sport",
+          notes: "",
+          transactionId: "checking5",
+          updatedAt: "",
+          accountId: "checking",
+        },
+        {
+          createdAt: "June 20th, 2020",
+          description: "Golden Sun Bakery",
+          amount: "50.00",
+          balance: "2187.79",
+          type: "Electronic",
+          category: "Food",
+          notes: "",
+          transactionId: "checking6",
+          updatedAt: "",
+          accountId: "checking",
+        },
+        {
+          createdAt: "June 20th, 2020",
+          description: "Golden Sun Bakery",
+          amount: "5.00",
+          balance: "2082.79",
+          type: "Electronic",
+          category: "Sport",
+          notes: "",
+          transactionId: "savings1",
+          updatedAt: "",
+          accountId: "savings",
+        },
+        {
+          createdAt: "June 20th, 2020",
+          description: "Golden Sun Bakery",
+          amount: "10.00",
+          balance: "2087.79",
+          type: "Electronic",
+          category: "Furnitures",
+          notes: "Waiting for refund",
+          transactionId: "savings2",
+          updatedAt: "",
+          accountId: "savings",
+        },
+        {
+          createdAt: "June 20th, 2020",
+          description: "Golden Sun Bakery",
+          amount: "20.00",
+          balance: "2097.79",
+          type: "Electronic",
+          category: "Food",
+          notes: "",
+          transactionId: "savings3",
+          updatedAt: "",
+          accountId: "savings",
+        },
+        {
+          createdAt: "June 20th, 2020",
+          description: "Golden Sun Bakery",
+          amount: "30.00",
+          balance: "2117.79",
+          type: "Electronic",
+          category: "Clothes",
+          notes: "",
+          transactionId: "savings4",
+          updatedAt: "",
+          accountId: "savings",
+        },
+        {
+          createdAt: "June 20th, 2020",
+          description: "Golden Sun Bakery",
+          amount: "40.00",
+          balance: "2147.79",
+          type: "Electronic",
+          category: "Sport",
+          notes: "",
+          transactionId: "savings5",
+          updatedAt: "",
+          accountId: "savings",
+        },
+        {
+          createdAt: "June 20th, 2020",
+          description: "Golden Sun Bakery",
+          amount: "50.00",
+          balance: "2187.79",
+          type: "Electronic",
+          category: "Food",
+          notes: "",
+          transactionId: "savings6",
+          updatedAt: "",
+          accountId: "savings",
+        },
+        {
+          createdAt: "June 20th, 2020",
+          description: "Golden Sun Bakery",
+          amount: "5.00",
+          balance: "2082.79",
+          type: "Electronic",
+          category: "Sport",
+          notes: "",
+          transactionId: "credit-card1",
+          updatedAt: "",
+          accountId: "credit-card",
+        },
+        {
+          createdAt: "June 20th, 2020",
+          description: "Golden Sun Bakery",
+          amount: "10.00",
+          balance: "2087.79",
+          type: "Electronic",
+          category: "Furnitures",
+          notes: "Waiting for refund",
+          transactionId: "credit-card2",
+          updatedAt: "",
+          accountId: "credit-card",
+        },
+        {
+          createdAt: "June 20th, 2020",
+          description: "Golden Sun Bakery",
+          amount: "20.00",
+          balance: "2097.79",
+          type: "Electronic",
+          category: "Food",
+          notes: "",
+          transactionId: "credit-card3",
+          updatedAt: "",
+          accountId: "credit-card",
+        },
+        {
+          createdAt: "June 20th, 2020",
+          description: "Golden Sun Bakery",
+          amount: "30.00",
+          balance: "2117.79",
+          type: "Electronic",
+          category: "Clothes",
+          notes: "",
+          transactionId: "credit-card4",
+          updatedAt: "",
+          accountId: "credit-card",
+        },
+        {
+          createdAt: "June 20th, 2020",
+          description: "Golden Sun Bakery",
+          amount: "40.00",
+          balance: "2147.79",
+          type: "Electronic",
+          category: "Sport",
+          notes: "",
+          transactionId: "credit-card5",
+          updatedAt: "",
+          accountId: "credit-card",
+        },
+        {
+          createdAt: "June 20th, 2020",
+          description: "Golden Sun Bakery",
+          amount: "50.00",
+          balance: "2187.79",
+          type: "Electronic",
+          category: "Food",
+          notes: "",
+          transactionId: "credit-card6",
+          updatedAt: "",
+          accountId: "credit-card",
+        },
+      ],
+    },
+  }</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html"><img src="../custom-template/assets/logo.png" ></a></h2><h3>Global</h3><ul><li><a href="global.html#AccountPage">AccountPage</a></li><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#DashboardAccount">DashboardAccount</a></li><li><a href="global.html#DashboardHeader">DashboardHeader</a></li><li><a href="global.html#EditNameForm">EditNameForm</a></li><li><a href="global.html#Error404">Error404</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Homepage">Homepage</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SignInForm">SignInForm</a></li><li><a href="global.html#TransactionDashboard">TransactionDashboard</a></li><li><a href="global.html#TransactionHeader">TransactionHeader</a></li><li><a href="global.html#accountsReducer">accountsReducer</a></li><li><a href="global.html#accountsSuccesful">accountsSuccesful</a></li><li><a href="global.html#allReducers">allReducers</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#loginReducer">loginReducer</a></li><li><a href="global.html#loginSuccesful">loginSuccesful</a></li><li><a href="global.html#profile">profile</a></li><li><a href="global.html#profileSuccesful">profileSuccesful</a></li><li><a href="global.html#signOut">signOut</a></li><li><a href="global.html#transactionsSuccesful">transactionsSuccesful</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#updateSuccesful">updateSuccesful</a></li><li><a href="global.html#userReducer">userReducer</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Fri Feb 24 2023 22:45:18 GMT+0100 (GMT+01:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

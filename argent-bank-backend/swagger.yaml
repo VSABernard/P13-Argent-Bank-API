@@ -70,6 +70,7 @@ paths:
           name: Authorization
           description: Attach Bearer JWT token
           required: true
+          type: string
       produces:
         - application/json
       responses:
@@ -93,6 +94,7 @@ paths:
           name: Authorization
           description: Attach Bearer JWT token
           required: true
+          type: string
         - in: body
           name: body
           description: Update user profile attributes
@@ -110,6 +112,161 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
+  
+  /accounts:
+    get:
+      tags:
+        - Account Module
+      summary: User's accounts API
+      description: API for Account
+      parameters:
+        - in: query
+          name: userId
+          description: ID of the user
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Account'
+        '400':
+          description: Invalid Fields
+        '404':
+          description: Account not found
+        '500':
+          description: Internal Server Error
+          
+  /transactions:
+    get:
+      tags:
+        - Transaction Module
+      summary: User's transaction API
+      description: User's transactions from a specific account
+      parameters:
+        - in: query
+          name: accountId
+          description: ID of the account
+          required: true
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/Transaction'
+        '400':
+          description: Invalid account ID supplied
+        '404':
+          description: Account not found
+        '405':
+          description: Validation exception
+        '500':
+          description: Internal Server Error
+  /transactions/{transactionId}:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Add transaction
+      description: API for adding the user's transaction
+      parameters:
+        - in: path
+          name: transactionId
+          description: ID of the transaction
+          required: true
+          type: integer
+        - in: body
+          name: body
+          description: Add user transaction attributes
+          required: true  
+          schema:
+            $ref: '#/definitions/UpdateTransaction'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/UpdateTransaction'
+        '400':
+          description: Invalid account ID supplied
+        '404':
+          description: Account not found
+        '405':
+          description: Validation exception
+        '500':
+          description: Internal Server Error
+    put:
+      tags:
+        - Transaction Module
+      summary: Update transaction
+      description: API for updating the user's transaction
+      parameters:
+        - in: path
+          name: transactionId
+          description: ID of the transaction
+          required: true
+          type: integer
+        - in: body
+          name: body
+          description: Update user transaction attributes
+          required: true  
+          schema:
+            $ref: '#/definitions/UpdateTransaction'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/UpdateTransaction'
+        '400':
+          description: Invalid account ID supplied
+        '404':
+          description: Account not found
+        '405':
+          description: Validation exception
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+        - Transaction Module
+      summary: Delete transaction
+      description: API for deleting the user's transaction
+      parameters:
+        - in: path
+          name: transactionId
+          description: ID of the transaction
+          required: true
+          type: integer
+        - in: body
+          name: body
+          description: Delete user transaction attributes
+          required: true  
+          schema:
+            $ref: '#/definitions/UpdateTransaction'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/UpdateTransaction'
+        '400':
+          description: Invalid account ID supplied
+        '404':
+          description: Account not found
+        '405':
+          description: Validation exception
+        '500':
+          description: Internal Server Error
+  
+  
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -164,3 +321,58 @@ definitions:
         type: string
       lastName:
         type: string
+  Account:
+    type: object
+    properties:
+      title:
+        type: string
+        example: 'Argent Bank Checking (x8349)'
+      amount:
+        type: string
+        example: '$2,082.79'
+      description:
+        type: string
+        example: 'Available Balance'
+      accountId:
+        type: string
+        example: 'checking'
+  Transaction:
+    type: object
+    properties:
+      createdAt:
+        type: string
+        example: 'June 20th, 2020'
+      description: 
+        type: object
+        example: 'Golden Sun Bakery'
+      amount:
+        type: number
+        example: '5.00'
+      balance:
+        type: number
+        example: '2082.79'
+      type: 
+        type: object
+        example: 'Electronic'
+      category: 
+        type: object
+        example: 'Sport'
+      notes:
+        type: object
+        example: 'Waiting for refund'
+      transactionId: 
+        type: object
+        example: 'checking1'
+      accountId: 
+        type: object
+        example: 'checking'
+  UpdateTransaction:
+    type: object
+    properties:
+      category: 
+        type: object
+        example: 'Sport'
+      notes:
+        type: object
+        example: 'Sports equipment for Bob' 
+  

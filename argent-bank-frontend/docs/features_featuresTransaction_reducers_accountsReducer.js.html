@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/userService.js</title>
+    <title>JSDoc: Source: features/featuresTransaction/reducers/accountsReducer.js</title>
     <link rel="icon" href="../custom-template/assets/favicon.png" />  
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -26,99 +26,25 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import axios from 'axios'
+            <pre class="prettyprint source linenums"><code>import { ACCOUNTS_SUCCESFUL, ACCOUNTS_FAILED } from '../actions/Action'
 
 /**
- * Function which calls the API /user/login
- * If the email and the password are correct then as authotization token will be returned
- * @param { String } email User's email
- * @param { String } password User's password
- * @returns Token
+ * The functions in Redux that take the curent state and an action and return a new state.
+ * @param { Object } state A boolean 
+ * @param { Object } action 
  */
-
-export async function login(email, password) {
-    const parameters = {
-    email: email,
-    password: password
+const accountsReducer = (state = null, action) => {
+    switch (action.type) {
+        case ACCOUNTS_SUCCESFUL:
+            return action.payload 
+        case ACCOUNTS_FAILED:
+            return null
+        default:
+            return state
     }
-
-    const url = 'http://localhost:3001/api/v1/user/login'
-    let token = null
-
-    await axios.post (url, parameters)
-        .then(response => {
-            token = response.data.body.token
-        })
-        .catch (error => {
-            console.log(error)
-        })    
-    return token    
-}       
-
-/**
- * Function which calls the API /user/profile
- * @param { String } token Authorization token
- * @returns User's profile
- */
-export async function profile({token}) {
-
-    let user = null
-
-    if(token != null){
-        const body = {}
-        const config = { 
-            headers: { Authorization: `Bearer ${token}`}
-        }
-        const url = 'http://localhost:3001/api/v1/user/profile'
-
-        
-        
-        await axios.post (url, body, config)
-            .then(response => {            
-                user = {
-                    firstName : response.data.body.firstName,
-                    lastName : response.data.body.lastName,
-                    email : response.data.body.email,
-                }
-            })
-            .catch (error => {
-                console.log(error)
-            })
-    }
-    return user
 }
 
-/**
- * Function which update the API /user/profile
- * @param { String } token Authorization token
- * @param { Object } firstName User's firtsname
- * @param { Object } lastName User's lastname
- * @returns User's profile
- */
-export async function update(token, firstName, lastName) {
-    const body = {
-        firstName: firstName,
-        lastName: lastName
-    }
-    const config = { 
-        headers: { Authorization: `Bearer ${token}`}
-    }
-    const url = 'http://localhost:3001/api/v1/user/profile'
-
-    let user = null
-    await axios.put (url, body, config)
-        .then(response => {            
-            user = {
-                firstName : response.data.body.firstName,
-                lastName : response.data.body.lastName,
-            }
-        })
-        .catch (error => {
-            console.log(error)
-        })
-    return user
-}
-</code></pre>
+export default accountsReducer</code></pre>
         </article>
     </section>
 

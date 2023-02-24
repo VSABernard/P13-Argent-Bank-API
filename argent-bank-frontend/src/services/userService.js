@@ -23,8 +23,7 @@ export async function login(email, password) {
         })
         .catch (error => {
             console.log(error)
-        })
-    
+        })    
     return token    
 }       
 
@@ -33,25 +32,31 @@ export async function login(email, password) {
  * @param { String } token Authorization token
  * @returns User's profile
  */
-export async function profile(token) {
-    const body = {}
-    const config = { 
-        headers: { Authorization: `Bearer ${token}`}
-    }
-    const url = 'http://localhost:3001/api/v1/user/profile'
+export async function profile({token}) {
 
     let user = null
-    await axios.post (url, body, config)
-        .then(response => {            
-            user = {
-                firstName : response.data.body.firstName,
-                lastName : response.data.body.lastName,
-                email : response.data.body.email,
-            }
-        })
-        .catch (error => {
-            console.log(error)
-        })
+
+    if(token != null){
+        const body = {}
+        const config = { 
+            headers: { Authorization: `Bearer ${token}`}
+        }
+        const url = 'http://localhost:3001/api/v1/user/profile'
+
+        
+        
+        await axios.post (url, body, config)
+            .then(response => {            
+                user = {
+                    firstName : response.data.body.firstName,
+                    lastName : response.data.body.lastName,
+                    email : response.data.body.email,
+                }
+            })
+            .catch (error => {
+                console.log(error)
+            })
+    }
     return user
 }
 
