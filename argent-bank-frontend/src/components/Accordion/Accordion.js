@@ -27,11 +27,16 @@ function Accordion ({transaction}) {
                         <div>Transaction type : {transaction.type}</div>
                         <div className='category'>
                             <p>Category : {transaction.category}</p>
-                            <FaPencilAlt className='pencil'/>
+                            <button className='buttonPencil'>
+                                <FaPencilAlt className='pencil'/>
+                            </button>
+                            
                         </div>
                         <div className='note'>
                             <p>Note :</p> 
-                            <FaPencilAlt className='pencil'/>
+                            <button className='buttonPencil'>
+                                <FaPencilAlt className='pencil'/>
+                            </button>
                         </div>
                     </ul>
                 </div>

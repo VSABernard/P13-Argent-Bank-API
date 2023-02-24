@@ -5,32 +5,14 @@
 }
 
 .titleTransactionList {    
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    row-gap: 30px;
-    width: 90%;
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr 1fr 1fr;
+    width: 95%;
     height: 40px;
     color: #fff;
     font-weight: bold;
-    margin-bottom: 20px;
-    margin-left: 40px;
-}
-
-.titleDate {
-    padding-left: 20px;
-}
-
-.titleDescription {
-    padding-left: 70px;
-}
-
-.titleAmount {
-    padding-left: 20px;
-}
-
-.titleBalance {
-    margin-right: 20px;
+    margin: 20px 40px 0;
+    flex-basis: 25%;
 }
 
 .transactionInfos {

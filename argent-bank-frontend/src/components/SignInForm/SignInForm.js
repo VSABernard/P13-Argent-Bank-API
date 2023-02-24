@@ -72,19 +72,19 @@ function SignInForm () {
     return (
         <div className="signInContent">
             <Form onSubmit={handleSubmit}>
-                <FaUserCircle className="userIcon" />
+                <FaUserCircle className="userIconSignIn" />
                 <h1 className="signInTitle">Sign In</h1>
 
-                <div className="formGroup">
-                    <Form.Group className="formLine" size="lg" controlId="email">
-                        <Form.Label className="formLabel">Username</Form.Label>
-                        <Form.Control autofocus type="email" value={email}
+                <div className="formGroupSignIn">
+                    <Form.Group className="formLineSignIn" size="lg" controlId="email">
+                        <Form.Label className="formLabelSignIn">Username</Form.Label>
+                        <Form.Control className="formControlSignIn" autofocus type="email" value={email}
                             onChange={(e) => setEmail(e.target.value)} />                            
                     </Form.Group>
 
-                    <Form.Group className="formLine" size="lg" controlId="password">
-                        <Form.Label className="formLabel">Password</Form.Label>
-                        <Form.Control autofocus type="password" value={password}
+                    <Form.Group className="formLineSignIn" size="lg" controlId="password">
+                        <Form.Label className="formLabelSignIn">Password</Form.Label>
+                        <Form.Control className="formControlSignIn" autofocus type="password" value={password}
                             onChange={(e) => setPassword(e.target.value)} />
                     </Form.Group>
 

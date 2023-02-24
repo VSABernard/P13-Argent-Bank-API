@@ -6,7 +6,6 @@ import Footer from '../../components/Footer/Footer'
 
 import '../Dashboard/Dashboard.css'
 
-
 /**
  * Component React which displays the account's info of the user
  * @component
@@ -14,7 +13,7 @@ import '../Dashboard/Dashboard.css'
 
 const Dashboard = () => {
     return (
-        <div>
+        <div className='dashboard'>
             <DashboardHeader />
             <DashboardAccount /> 
             <Footer />

@@ -1,13 +1,13 @@
 .accordion {
     display: flex;
     flex-direction: column;
-    border: 1 px solid white;
     margin-top: 10px;
     height: auto;
 }
 
 .accordion:hover {
     color: #42b983;
+    text-decoration: underline;
 }
 
 .accordionHeader {
@@ -20,9 +20,8 @@
 }
 
 .accordionTitle {
-    display: flex;
-    flex-direction: row;    
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr 1fr 1fr;
     list-style-type: none;
     padding: 10px;
     border: 1px solid #12002b;
@@ -32,7 +31,7 @@
     height: 40px;
 }
 
-.accordionTitle p{
+.accordionTitle p {
     margin: auto;
     padding: 0;
     font-size: 18px;
@@ -42,9 +41,8 @@
 .chevronUp, .chevronDown {
     height: 20px;
     margin-top: 10px;
-    padding-left: 20px;
+    padding-left: 50px;
 }
-
 
 .accordionBody {
     display: flex;
@@ -52,8 +50,7 @@
     justify-content: space-between;
     background-color: white;
     margin-top: -10px;
-    padding: 10px;
-    width: auto;
+    width: 100%;
 }
 
 .accordionList {
@@ -61,7 +58,7 @@
     flex-direction: column;
     justify-content: space-between;
     list-style-type: none;
-    padding: 0;
+    padding-left: 15%;
     gap: 10px;
 }
 
@@ -74,4 +71,16 @@
 
 .category p, .note p {
     margin: 0;
+}
+
+.buttonPencil {
+    color: #12002b;
+    border: none;
+    background-color: white;
+}
+
+.buttonPencil:hover {
+    cursor: pointer;
+    transform: scale(1.5);
+    color: #42b983;
 }

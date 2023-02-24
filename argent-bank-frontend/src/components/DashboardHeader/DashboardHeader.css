@@ -4,7 +4,6 @@
     justify-content: space-around;
     height: 30px;
     width: 200px;
-    gap: 15px;
 }
 
 .userFirtsname {
@@ -14,6 +13,11 @@
     height: 30px;
     padding: 0 10px;
     gap: 5px;
+}
+
+.userIconDashboard {
+    width: 20px;
+    height: 20px;
 }
 
 .userFirtsname p {
@@ -43,8 +47,11 @@
 .buttonSignOut:hover {
     text-decoration: underline;
     cursor: pointer;
+    color: #00bc77;
+    transform: scale(1.1);
 }
 
 .signoutIcon {
-    margin-top: 5px;
+    margin-top: 3px;
+    margin-right: 5px;
 }

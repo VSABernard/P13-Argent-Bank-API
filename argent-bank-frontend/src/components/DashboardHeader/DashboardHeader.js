@@ -51,7 +51,7 @@ const DashboardHeader = () => {
                 </Link>
                 <div className="signOut">
                     <div className='userFirtsname'>
-                        <FaUserCircle className="userIcon" />
+                        <FaUserCircle className="userIconDashboard" />
                         <p>{ user.firstName }</p>
                     </div>
                     <Form className='signOutBlock' onSubmit={handleSubmit}>

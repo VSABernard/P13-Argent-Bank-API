@@ -91,12 +91,12 @@ const EditNameForm = ({ show, close }) => {
             {/* Whenever user clicks outside it should close the modal */}
             <Form className='editNameForm' onSubmit={handleSubmitEditName} onClick={(e) => e.stopPropagation()}>      
                 <div methode='get' className='editNameBlock'>
-                    <Form.Group className="formLine" size="lg" controlId="firstName">
+                    <Form.Group className="formLineEdit" size="lg" controlId="firstName">
                         <Form.Control autofocus type="text" placeholder={ userFirstName }
                             onChange={(e) => setFirstName(e.target.value)} />
                     </Form.Group>
 
-                    <Form.Group className="formLine" size="lg" controlId="lastName">
+                    <Form.Group className="formLineEdit" size="lg" controlId="lastName">
                         <Form.Control autofocus type="text" placeholder={ userLastName }
                             onChange={(e) => setLastName(e.target.value)} />
                     </Form.Group>

@@ -61,7 +61,7 @@
     padding: 10px;
     text-decoration: none;
 }
-  
+
 .header {
     color: #fff;
     margin-bottom: 2rem;
@@ -83,15 +83,14 @@
     color: #fff;
 }
 
-.transactionButton:hover {
+.editButton:hover, .transactionButton:hover {
     cursor: pointer;
+    color: black;
     text-decoration: underline;
+    transform: scale(1.1);;
 }
   
 @media (min-width: 720px) {
-    /* .account {
-      flex-direction: row;
-    } */
   
     .accountContentWrapper.cta {
       flex: 0;
