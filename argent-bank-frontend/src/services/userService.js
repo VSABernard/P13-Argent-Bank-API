@@ -32,11 +32,11 @@ export async function login(email, password) {
  * @param { String } token Authorization token
  * @returns User's profile
  */
-export async function profile({token}) {
+export async function profile(token) {
 
     let user = null
 
-    if(token != null){
+    if(token != null && token !== ''){
         const body = {}
         const config = { 
             headers: { Authorization: `Bearer ${token}`}

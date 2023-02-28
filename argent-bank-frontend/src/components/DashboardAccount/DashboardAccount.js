@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Link } from 'react-router-dom'
 
 import { profileSuccesful, profileFailed } from '../../features/featuresUser/actions/Action'
@@ -15,20 +15,26 @@ import '../../components/DashboardAccount/DashboardAccount.css'
  * @component
  */
 
-const DashboardAccount = () => {  
-   
+const DashboardAccount = () => {   
+      
     /**
-     * Store the token variable
+     * Store the token's variable which is an empty object at first 
      */
-    const [token, setToken] = useState([])
+    const [token, setToken] = useState('')
 
     /**
-     * Store the data's account variables
+     * Store the user's variable which is empty for each object at first
+     */
+    const [user, setUser] = useState({firstName:'',lastName:''})
+
+    /**
+     * Store the data's account variables which is an empty array at first
      */
     const [accountDatas, setAccountDatas] = useState([])
 
     /**
      * When the component is mounted, it retrieve the token from the localStorage
+     * The second parameter is an empty array, so the useEffect is used only one time
      */
     useEffect(() => {
         const tokenLocalStorage = JSON.parse(localStorage.getItem('token'))
@@ -49,12 +55,14 @@ const DashboardAccount = () => {
     /**
      * useEffect is used to retrieve the datas from the user's service in asynchronous mode when dispatch or token changes
      * also to retrieve the datas from the transaction service
+     * useEffect is trigerred when the valeur of dispatch and token change
      */
     useEffect(() => {
         async function fetchUser (){
             let userProfile = await profile (token)
             if( userProfile != null ) {
                 dispatch(profileSuccesful(userProfile))
+                setUser(userProfile)
             } else {
                 dispatch(profileFailed("User not found"))
             }
@@ -68,17 +76,24 @@ const DashboardAccount = () => {
                 dispatch(accountsFailed("User not found"))
             }
         }
-        if(token.length > 0){
+        if(token !== ''){
             fetchUser()
             fetchAccounts()
         }        
-    }, [dispatch, token]) 
+    }, [dispatch, token])    
 
     /**
      * Get the user profile from the state
      */
-    const user = useSelector(state => state.user)    
-
+    const userStore = useSelector(state => state.user)  
+ 
+    /**
+     * useEffect is used to detect the change in the editName
+     */
+    useEffect(() => {
+        setUser(userStore)
+    },[userStore])
+    
     /**
      * Create one state to open and close modal editNameForm
      */
