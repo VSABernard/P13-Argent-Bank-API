@@ -166,7 +166,6 @@ paths:
           description: Validation exception
         '500':
           description: Internal Server Error
-  /transactions/{transactionId}:
     post:
       security:
         - Bearer: []
@@ -175,11 +174,6 @@ paths:
       summary: Add transaction
       description: API for adding the user's transaction
       parameters:
-        - in: path
-          name: transactionId
-          description: ID of the transaction
-          required: true
-          type: integer
         - in: body
           name: body
           description: Add user transaction attributes
@@ -201,6 +195,7 @@ paths:
           description: Validation exception
         '500':
           description: Internal Server Error
+  /transactions/{transactionId}:
     put:
       tags:
         - Transaction Module
@@ -249,14 +244,14 @@ paths:
           description: Delete user transaction attributes
           required: true  
           schema:
-            $ref: '#/definitions/UpdateTransaction'
+            $ref: '#/definitions/DeleteTransaction'
       produces:
         - application/json
       responses:
         '200':
           description: Successful operation
           schema:
-            $ref: '#/definitions/UpdateTransaction'
+            $ref: '#/definitions/DeleteTransaction'
         '400':
           description: Invalid account ID supplied
         '404':
@@ -374,5 +369,11 @@ definitions:
         example: 'Sport'
       notes:
         type: object
-        example: 'Sports equipment for Bob' 
-  
+        example: 'Sports equipment for Bob'  
+  DeleteTransaction:
+    type: object
+    properties:
+      category: 
+        type: object
+      notes:
+        type: object
