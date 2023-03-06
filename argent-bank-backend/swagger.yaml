@@ -124,7 +124,7 @@ paths:
           name: userId
           description: ID of the user
           required: true
-          type: integer
+          type: integer        
       produces:
         - application/json
       responses:
@@ -151,6 +151,11 @@ paths:
           description: ID of the account
           required: true
           type: integer
+        - in: query
+          name: month
+          description: Month of user's transaction (MM/YYYY)
+          required: true
+          type: string 
       produces:
         - application/json
       responses:

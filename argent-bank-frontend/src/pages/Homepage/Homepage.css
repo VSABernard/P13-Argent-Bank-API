@@ -2,30 +2,37 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height: 100vh;
 }
 
-.main {
+.mainHomepage {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     flex: 1;
+    position: relative;
+    height: min-content;
 }  
   
 .hero {
+    position: relative;
     background-image: url("../../assets/bank-tree.jpeg");
     background-position: 0 -205px;
     background-size: cover;
     background-repeat: no-repeat;
     height: 400px;
-    position: relative;
+    width: 100%;
 }
   
 .heroContent {
-    position: relative;
-    top: 22%;
-    left: 68%;
-    right: 0;
+    position: absolute;
+    margin-top: 7%;
+    margin-left: 65%;
+    margin-right: 5%;
     height: auto;
-    width: 400px;
+    width: auto;
     background: white;
-    padding: 25px;
+    padding: 15px;
     text-align: left;
 }
 
@@ -54,32 +61,69 @@
     font-size: 20px;
 }
 
-@media (min-width: 920px) {
+@media (max-width: 885px){
     .hero {
-      height: 400px;
-      background-position: 0% 33%;
+        height: 300px;
     }
-  
     .heroContent {
-      position: absolute;
-      top: 50px;
-      right: 50px;
-      width: 300px;
-      margin: 2rem;
+        margin-left: 53%;
+        margin-right: 10%;
     }
-  
     .heroContent .subtitle {
-      font-size: 1.5rem;
+        font-size: 20px;
     }
-  
     .heroContent .text {
-      font-size: 1.2rem;
+        font-size: 14px;
     }
 }
-  
+
+@media (max-width: 700px) {
+    .hero {
+        height: 230px;
+     }
+    .heroContent {
+        margin-top: 2%;
+    }
+    .heroContent .subtitle {
+        font-size: 18px;
+    }
+    .heroContent .text {
+        font-size: 14px;
+    } 
+}
+
+@media (max-width: 580px) {
+    .hero {
+        height: 160px;
+     }
+    .heroContent {
+        margin-top: 2%;
+        padding: 5px;
+    }
+    .heroContent .subtitle {
+        font-size: 14px;
+    }
+    .heroContent .text {
+        font-size: 10px;
+    } 
+}
+
+@media (max-width: 480px) {
+    .hero {
+        height: 105px;
+     }
+    .heroContent .subtitle {
+        font-size: 10px;
+    }
+    .heroContent .text {
+        font-size: 10px;
+    } 
+}
+
 .features {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
   
 @media (min-width: 920px) {
@@ -98,6 +142,12 @@
 .featureItem {
     flex: 1;
     padding: 2.5rem;
+}
+
+@media (max-width: 885px) {
+    .featureItem {
+        padding: 20px;
+    }
 }
   
 .featureItemTitle {

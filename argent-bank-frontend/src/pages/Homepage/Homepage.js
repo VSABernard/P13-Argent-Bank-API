@@ -18,7 +18,7 @@ const Homepage = () => {
     return (
         <div className='home'>
             <Header />
-            <main className='main'>
+            <main className='mainHomepage'>
                 <div className='hero'>
                     <section className='heroContent'>
                         <h2 className='srOnly'>Promoted Content</h2>

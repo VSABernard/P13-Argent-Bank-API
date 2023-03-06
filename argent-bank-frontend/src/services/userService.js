@@ -16,15 +16,17 @@ export async function login(email, password) {
 
     const url = 'http://localhost:3001/api/v1/user/login'
     let token = null
+    let errorMessage = null
 
     await axios.post (url, parameters)
         .then(response => {
             token = response.data.body.token
         })
         .catch (error => {
+            errorMessage = error.message
             console.log(error)
         })    
-    return token    
+    return {token,errorMessage}    
 }       
 
 /**

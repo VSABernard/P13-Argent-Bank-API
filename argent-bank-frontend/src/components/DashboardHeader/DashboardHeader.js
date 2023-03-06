@@ -37,7 +37,7 @@ const DashboardHeader = () => {
      */
     function handleSubmit(event) {
         event.preventDefault()
-        localStorage.removeItem('token')
+        localStorage.removeItem('token')        // Token will be removed when sign out button is clicked
         dispatch(signOut())
         nav('/')
     }

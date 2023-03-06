@@ -100,3 +100,9 @@
       width: 200px;
     }
 }
+
+@media (max-width: 510px) {
+    .transactionButton {
+        font-size: 14px;
+    }
+}

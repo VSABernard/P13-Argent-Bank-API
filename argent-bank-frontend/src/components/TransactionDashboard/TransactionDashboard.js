@@ -22,7 +22,7 @@ const TransactionDashboard = ({accountId}) => {
     /**
      * Store the token variable
      */
-    const [token, setToken] = useState([])
+    const [token, setToken] = useState('')
 
     /**
      * When the component is mounted, it retrieve the token from the localStorage

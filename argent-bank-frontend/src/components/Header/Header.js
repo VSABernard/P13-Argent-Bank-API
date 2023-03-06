@@ -26,12 +26,12 @@ const Header = () => {
                 <div className="signButton">
                     <FaUserCircle className="userIcon" />
                     {!isLogged && 
-                        <NavLink className={'navButton'} exact to='/SignIn'>
+                        <NavLink className={'navButton'} to='/SignIn'>
                             Sign In
                         </NavLink>
                     }
                     {isLogged && 
-                        <NavLink className={'navButton'} exact to='/'>
+                        <NavLink className={'navButton'} to='/'>
                             Sign Out
                         </NavLink>
                     }

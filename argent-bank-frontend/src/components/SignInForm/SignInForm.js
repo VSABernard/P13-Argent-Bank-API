@@ -24,7 +24,8 @@ function SignInForm () {
      * The autoFocus flag is setted for our fields, so that when the form loads, it sets focus to this field.
      */
     const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")     
+    const [password, setPassword] = useState("") 
+    const [isError, setIsError] = useState(false)    
 
     /**
      * The hook that comes with React Router that will allow us to use the browser’s History API.
@@ -54,7 +55,12 @@ function SignInForm () {
         let email = event.target.querySelector('input#email.form-control').defaultValue
         let password = event.target.querySelector('input#password.form-control').defaultValue
                 
-        let token = await login( email, password )
+        let {token,errorMessage} = await login( email, password )
+        if(errorMessage){
+            setIsError(true)
+        } else {
+            setIsError(false)
+        }
         
         /**
          * The token is saved in localStorage when the sign in is succesful
@@ -73,18 +79,24 @@ function SignInForm () {
         <div className="signInContent">
             <Form onSubmit={handleSubmit}>
                 <FaUserCircle className="userIconSignIn" />
-                <h1 className="signInTitle">Sign In</h1>
+                <h1 className="signInTitle">Sign In</h1>               
+                
+                { isError && 
+                <div className="errorMessage">
+                    Username/password is incorrect
+                </div>
+                }
 
                 <div className="formGroupSignIn">
                     <Form.Group className="formLineSignIn" size="lg" controlId="email">
                         <Form.Label className="formLabelSignIn">Username</Form.Label>
-                        <Form.Control className="formControlSignIn" autofocus type="email" value={email}
+                        <Form.Control className="formControlSignIn" autoFocus type="email" value={email}
                             onChange={(e) => setEmail(e.target.value)} />                            
                     </Form.Group>
 
                     <Form.Group className="formLineSignIn" size="lg" controlId="password">
                         <Form.Label className="formLabelSignIn">Password</Form.Label>
-                        <Form.Control className="formControlSignIn" autofocus type="password" value={password}
+                        <Form.Control className="formControlSignIn" autoFocus type="password" value={password}
                             onChange={(e) => setPassword(e.target.value)} />
                     </Form.Group>
 

@@ -15,6 +15,12 @@
     width: 20px;
 }
 
+.errorMessage {
+    color: red;
+    font-weight: 600;
+    margin-left: -10px;
+}
+
 .formGroupSignIn {
     display: flex;
     flex-direction: column;
