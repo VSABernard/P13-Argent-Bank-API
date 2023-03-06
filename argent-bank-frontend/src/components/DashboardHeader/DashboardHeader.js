@@ -32,12 +32,12 @@ const DashboardHeader = () => {
     const dispatch = useDispatch()
 
     /**
-     * The callback handleSubmit is triggered when the form is submitted.
+     * The callback handleSubmit for the sign out button is triggered when the form is submitted.
      * @param {*} event 
      */
     function handleSubmit(event) {
         event.preventDefault()
-        
+        localStorage.removeItem('token')
         dispatch(signOut())
         nav('/')
     }

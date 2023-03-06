@@ -202,6 +202,11 @@ paths:
       summary: Update transaction
       description: API for updating the user's transaction
       parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
         - in: path
           name: transactionId
           description: ID of the transaction
@@ -234,6 +239,11 @@ paths:
       summary: Delete transaction
       description: API for deleting the user's transaction
       parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
         - in: path
           name: transactionId
           description: ID of the transaction
@@ -364,6 +374,9 @@ definitions:
   UpdateTransaction:
     type: object
     properties:
+      transactionId:
+        type: object
+        example: 'checking1'
       category: 
         type: object
         example: 'Sport'
@@ -373,7 +386,11 @@ definitions:
   DeleteTransaction:
     type: object
     properties:
+      transactionId:
+        type: object
+        example: 'checking1'
       category: 
         type: object
       notes:
         type: object
+        
