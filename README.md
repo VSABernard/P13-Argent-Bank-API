@@ -29,7 +29,7 @@ Argent Bank uses the following tech stack:
 * [MongoDB Community Server](https://www.mongodb.com/try/download/community)
 
 ### **_Install the app_**
-1. Fork and clone [this repository](https://github.com/OpenClassrooms-Student-Center/Project-10-Bank-API1). 
+1. Fork and clone [this repository](https://github.com/VSABernard/P13-Argent-Bank-API.git). 
 2. Install all dependencies
 3. Start populate database with two users
 >>**_npm run populate-db_**     
