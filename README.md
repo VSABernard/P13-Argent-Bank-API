@@ -22,6 +22,7 @@ This project is divided into several phases:
   5. User can modify the profile and keep the data in the database.
   
 * Phase 2: **Transactions** - This would be to specify the API endpoints needed for a possible second mission once we have completed the first.
+  [See here](https://app.swaggerhub.com/apis/VERONICASTEVANIA/bank-argent_api_documentation/1.0.0).
 
 ###  **_Prerequisites_**
 Argent Bank uses the following tech stack:
