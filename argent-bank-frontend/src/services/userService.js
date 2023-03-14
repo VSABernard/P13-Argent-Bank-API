@@ -43,9 +43,7 @@ export async function profile(token) {
         const config = { 
             headers: { Authorization: `Bearer ${token}`}
         }
-        const url = 'http://localhost:3001/api/v1/user/profile'
-
-        
+        const url = 'http://localhost:3001/api/v1/user/profile'        
         
         await axios.post (url, body, config)
             .then(response => {            

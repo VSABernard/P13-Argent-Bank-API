@@ -50,10 +50,10 @@ const DashboardHeader = () => {
                     <img src={logo} alt="Argent Bank logo" />
                 </Link>
                 <div className="signOut">
-                    <div className='userFirtsname'>
+                    <Link className='userFirtsname'to="/Dashboard">
                         <FaUserCircle className="userIconDashboard" />
                         <p>{ user.firstName }</p>
-                    </div>
+                    </Link>
                     <Form className='signOutBlock' onSubmit={handleSubmit}>
                         <FaSignOutAlt className='signoutIcon' />
                         <Button className="buttonSignOut" block="true" size="lg" type="submit" >

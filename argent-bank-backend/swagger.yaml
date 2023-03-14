@@ -345,7 +345,7 @@ definitions:
         example: 'Available Balance'
       accountId:
         type: string
-        example: 'checking'
+        example: 'check00'
   Transaction:
     type: object
     properties:
@@ -372,16 +372,16 @@ definitions:
         example: 'Waiting for refund'
       transactionId: 
         type: object
-        example: 'checking1'
+        example: 'check01'
       accountId: 
         type: object
-        example: 'checking'
+        example: 'check00'
   UpdateTransaction:
     type: object
     properties:
       transactionId:
         type: object
-        example: 'checking1'
+        example: 'check01'
       category: 
         type: object
         example: 'Sport'
@@ -393,7 +393,7 @@ definitions:
     properties:
       transactionId:
         type: object
-        example: 'checking1'
+        example: 'check01'
       category: 
         type: object
       notes:
