@@ -357,10 +357,10 @@ definitions:
         example: 'Golden Sun Bakery'
       amount:
         type: number
-        example: '5.00'
+        example: '$5.00'
       balance:
         type: number
-        example: '2082.79'
+        example: '$2082.79'
       type: 
         type: object
         example: 'Electronic'
