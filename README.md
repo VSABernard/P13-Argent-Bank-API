@@ -34,10 +34,20 @@ Argent Bank uses the following tech stack:
 2. Install all dependencies
 3. Start populate database with two users
 >>**_npm run populate-db_**     
-4. Start the backend on port 3000
+4. Start the backend : 
+>>* Access the project directory: <br> 
+>>**_cd argent-bank-backend_**
+>>* Launch : 
 >>**_npm run dev:server_**
-5. Start the frontend on port 3001 
+>>* The backend will be launched in
+>>**_http://localhost:3000/_**
+5. Start the frontend 
+>>* Access the project directory: <br> 
+>>**_cd argent-bank-frontend_**
+>>* Launch : 
 >>**_npm start_**
+>>* The backend will be launched in
+>>**_http://localhost:3001/_**
 
 ### **_Populated Database Data_**
 Once you run the populate-db script, you should have two users in your database:
