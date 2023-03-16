@@ -34,7 +34,6 @@ const EditNameForm = ({ show, close }) => {
         if(tokenLocalStorage){
             setToken(tokenLocalStorage)          
         } 
-
     },[]) 
 
     /**
@@ -78,7 +77,6 @@ const EditNameForm = ({ show, close }) => {
         } else {
             dispatch(updateFailed("Error"))
         }
-
         close()
     }
         

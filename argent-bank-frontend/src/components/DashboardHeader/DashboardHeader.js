@@ -46,7 +46,7 @@ const DashboardHeader = () => {
         <header className="headerDashboard">
             <h1 className="srOnly">Argent Bank</h1>
             <ul className="headerNav">
-                <Link className="logo" to="/" >
+                <Link className="logo" to="/" onClick={handleSubmit}>
                     <img src={logo} alt="Argent Bank logo" />
                 </Link>
                 <div className="signOut">
