@@ -46,7 +46,7 @@ Argent Bank uses the following tech stack:
 >>**_cd argent-bank-frontend_**
 >>* Launch : 
 >>**_npm start_**
->>* The backend will be launched in
+>>* The frontend will be launched in
 >>**_http://localhost:3001/_**
 
 ### **_Populated Database Data_**
